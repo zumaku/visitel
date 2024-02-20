@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // WITEL
-        VisitelWitel::factory(10)->create();
+        VisitelWitel::factory(env('JML_WITEL'))->create();
 
 
         // ROLE
@@ -48,10 +48,10 @@ class DatabaseSeeder extends Seeder
 
 
         // USER
-        VisitelUser::factory(30)->create();
+        VisitelUser::factory(env('JML_USER'))->create();
 
 
         // CLIENT
-        VisitelClient::factory(40)->create();
+        VisitelClient::factory(env('JML_CLIENT'))->create();
     }
 }

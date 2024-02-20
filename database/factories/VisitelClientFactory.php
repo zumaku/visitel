@@ -18,7 +18,7 @@ class VisitelClientFactory extends Factory
     {
         $status = "";
         $random_status = rand(1,3);
-        $random_witel = rand(1,10);
+        $random_witel = rand(1,env('JML_WITEL'));
 
         switch ($random_status) {
             case 1:

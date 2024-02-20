@@ -23,7 +23,7 @@ class VisitelUserFactory extends Factory
      */
     public function definition(): array
     {
-        $random_witel = rand(1,10);
+        $random_witel = rand(1,env('JML_WITEL'));
         $random_role = rand(1,2);
         $random_am_type = rand(1,3);
 
