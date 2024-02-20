@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\VisitelWitel;
 use App\Models\VisitelRole;
 use App\Models\VisitelAmType;
+use App\Models\VisitelClient;
 use App\Models\VisitelUser;
 
 class DatabaseSeeder extends Seeder
@@ -48,5 +49,9 @@ class DatabaseSeeder extends Seeder
 
         // USER
         VisitelUser::factory(30)->create();
+
+
+        // CLIENT
+        VisitelClient::factory(40)->create();
     }
 }
