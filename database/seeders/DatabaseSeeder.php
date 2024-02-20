@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\VisitelWitel;
 use App\Models\VisitelRole;
+use App\Models\VisitelAmType;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +30,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        
+        // AM TYPE
+        VisitelAmType::create([
+            'name'=>'Divisi Goverment Srvice',
+            'description'=>'Divisi Pelayanan Pemerintah bertanggung jawab untuk menyediakan solusi teknologi informasi dan layanan terkait kepada berbagai lembaga pemerintah. Divisi ini berfokus pada pengembangan sistem, aplikasi, dan infrastruktur yang mendukung kebutuhan unik dan kompleks dari lembaga pemerintah. Layanan yang disediakan dapat mencakup pengembangan perangkat lunak khusus, integrasi sistem, manajemen data, dan dukungan teknis secara umum.',
+        ]);
+        VisitelAmType::create([
+            'name'=>'Divisi Enterprice Srvice',
+            'description'=>'Divisi Pelayanan Enterprise merupakan unit bisnis yang menawarkan solusi teknologi informasi kepada perusahaan-perusahaan besar atau enterprise. Fokus utama dari divisi ini adalah memberikan layanan yang memenuhi kebutuhan teknologi dan bisnis khusus dari perusahaan besar, seperti sistem manajemen perusahaan, keamanan informasi, analisis data tingkat tinggi, dan integrasi sistem perusahaan secara menyeluruh.',
+        ]);
+        VisitelAmType::create([
+            'name'=>'Divisi Bissunes Srvice',
+            'description'=>'Divisi Pelayanan Bisnis bertanggung jawab atas menyediakan solusi teknologi informasi dan layanan terkait kepada berbagai jenis bisnis, mulai dari usaha kecil hingga menengah. Fokus dari divisi ini adalah membantu bisnis dalam meningkatkan efisiensi, produktivitas, dan kinerja mereka melalui pemanfaatan teknologi informasi. Layanan yang disediakan oleh divisi ini mungkin mencakup pengembangan situs web, aplikasi mobile, sistem manajemen pelanggan (CRM), e-commerce, dan konsultasi IT untuk bisnis.',
+        ]);
     }
 }
