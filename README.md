@@ -56,6 +56,8 @@ JML_USER=30
 JML_CLIENT=100
 JML_REPORT=150
 ```
+- Konfigurasi ini hanya berjalan di local
+- Konfigirasi akan segera diupdate
 
 5. **Jalankan Migrasi Database**
 ```bash
