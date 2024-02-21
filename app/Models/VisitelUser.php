@@ -42,4 +42,29 @@ class VisitelUser extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(VisitelRole::class);
+    }
+
+    public function witel()
+    {
+        return $this->belongsTo(VisitelWitel::class);
+    }
+
+    public function visitelAmType()
+    {
+        return $this->hasOne(VisitelAmType::class);
+    }
+
+    public function clients()
+    {
+        return $this->belongsToMany(VisitelClient::class);
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(VisitelReport::class);
+    }
 }
