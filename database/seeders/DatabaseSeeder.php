@@ -8,6 +8,7 @@ use App\Models\VisitelWitel;
 use App\Models\VisitelRole;
 use App\Models\VisitelAmType;
 use App\Models\VisitelClient;
+use App\Models\VisitelReport;
 use App\Models\VisitelUser;
 
 class DatabaseSeeder extends Seeder
@@ -53,5 +54,9 @@ class DatabaseSeeder extends Seeder
 
         // CLIENT
         VisitelClient::factory(env('JML_CLIENT'))->create();
+
+
+        // REPORT
+        VisitelReport::factory(env('JML_REPORT'))->create();
     }
 }
