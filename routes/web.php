@@ -17,8 +17,9 @@ use Inertia\Inertia;
 */
 
 Route::get('/playground', function () {
-    return Inertia::render('Tes');
+    return Inertia::render('Playground');
 });
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
