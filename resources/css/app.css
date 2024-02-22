@@ -4,10 +4,10 @@
 
 @font-face {
     font-family: Poppins-Regular;
-    src: url(../fonts/Poppins-Regular.ttf) format('truetype');
+    src: url(../fonts/Poppins-Regular.ttf) format("truetype");
 }
 
 @font-face {
     font-family: TelkomselBatikSans-Bold;
-    src: url(../fonts/TelkomselBatikSans-Bold.ttf) format('truetype');
+    src: url(../fonts/TelkomselBatikSans-Bold.ttf) format("truetype");
 }

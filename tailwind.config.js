@@ -55,6 +55,9 @@ export default {
                 },
                 disable: '#E5E5E5'
             },
+            backgroundImage: {
+                'hero-login': "url('/img/hero_logo.png')",
+            }
         },
         screens: {
             xs: "480px",
