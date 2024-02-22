@@ -13,8 +13,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                'poppins': ['Poppins-Regular', 'system-ui', 'sans-serif'],
-                'telkom-batik': ['TelkomselBatikSans-Bold', 'system-ui', 'serif']
+                'poppins': ['Poppins-Regular', 'sans-serif'],
+                'telkombatik': ['TelkomselBatikSans-Bold', 'serif']
             },
             colors: {
                 primary: {
@@ -55,15 +55,15 @@ export default {
                 },
                 disable: '#E5E5E5'
             },
-            screens: {
-                xs: "480px",
-                ss: "620px",
-                sm: "768px",
-                sl: "930px",
-                md: "1060px",
-                lg: "1200px",
-                xl: "1700px",
-            },
+        },
+        screens: {
+            xs: "480px",
+            ss: "620px",
+            sm: "768px",
+            sl: "930px",
+            md: "1060px",
+            lg: "1200px",
+            xl: "1700px",
         },
     },
 
