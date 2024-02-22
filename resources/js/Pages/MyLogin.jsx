@@ -3,7 +3,7 @@ import style from '@/styles';
 import { GoogleIcon } from '../Components/icons';
 import { PrimaryLogo } from '@/Components/logos';
 
-export default function Tes() {
+export default function MyLogin() {
     return (
         <>
             <Head title="Login" />

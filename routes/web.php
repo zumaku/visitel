@@ -20,6 +20,10 @@ Route::get('/playground', function () {
     return Inertia::render('Playground');
 });
 
+Route::get('/my-login', function () {
+    return Inertia::render('MyLogin');
+});
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
