@@ -13,9 +13,11 @@ export default function Playground() {
         <div className='flex w-full h-screen'>
             <aside className={`${
                 isOpen ? 'w-64' : 'w-26'
-            } bg-tertiary-800 text-white px-4 py-8 flex flex-col justify-between items-start transition-all relative`}>
+            } px-2 bg-tertiary-800 text-white  py-8 flex flex-col justify-between items-start transition-all relative`}>
                 <div className="w-full">
-                    {isOpen ? <SecondaryLogo className='w-32 mb-12' primary={true} /> : <MarkLogo className='w-10 mb-12' primary={true} />}
+                    <a href="/" className={`px-5 w-full flex ${isOpen ? 'justify-start' : 'justify-center'}`}>
+                        {isOpen ? <SecondaryLogo className='w-32 mb-12' primary={true} /> : <MarkLogo className='w-9 mb-12' primary={true} />}
+                    </a>
 
                     <SideMenuButton name={"Beranda"} link={"/beranda"} isOpen={isOpen} isActive={true} className='mb-2' >
                         <HomeIcon className='h-6 w-6'/>
@@ -27,7 +29,7 @@ export default function Playground() {
                         <BuildingOfficeIcon className='h-6 w-6'/>
                     </SideMenuButton>
                 </div>
-                <div className={`w-full flex ${isOpen ? "justify-between" : "justify-center"} items-center hover:cursor-pointer`}>
+                <div className={`px-5 w-full flex ${isOpen ? "justify-between" : "justify-center"} items-center hover:cursor-pointer`}>
                     <div className="flex items-center">
                         <div className="w-8 h-8 rounded-full mr-2 bg-gradient-to-r from-fuchsia-500 to-cyan-500"></div>
                         {isOpen && <p className={`${style.bodyHeavy} text-white`}>Kimi No Nawa</p>}
@@ -38,6 +40,9 @@ export default function Playground() {
                 {/* Toggle */}
                 <SideOpen className='absolute -right-5' isOpen={isOpen} setIsOpen={setIsOpen}/>
             </aside>
+            <main>
+                <h1>Hellow</h1>
+            </main>
         </div>
     )
 } 
