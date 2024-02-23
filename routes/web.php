@@ -21,13 +21,8 @@ Route::get('/playground', function () {
     return Inertia::render('Playground');
 });
 
-Route::get('/my-login', function () {
-    return Inertia::render('MyLogin');
-});
 
-
-
-
+// Google Login Route
 Route::get('/auth/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/callback', [ProviderController::class, 'callback']);
 
