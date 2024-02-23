@@ -21,6 +21,15 @@ class VisitelUser extends Authenticatable
         'name',
         'email',
         'password',
+
+        'google_id',
+        'google_token',
+        'google_refresh_token',
+        'google_picture',
+
+        'visitel_witels_id',
+        'visitel_roles_id',
+        'visitel_am_types_id',
     ];
 
     /**

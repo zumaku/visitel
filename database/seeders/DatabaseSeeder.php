@@ -46,17 +46,21 @@ class DatabaseSeeder extends Seeder
             'name'=>'Divisi Bissunes Srvice',
             'description'=>'Divisi Pelayanan Bisnis bertanggung jawab atas menyediakan solusi teknologi informasi dan layanan terkait kepada berbagai jenis bisnis, mulai dari usaha kecil hingga menengah. Fokus dari divisi ini adalah membantu bisnis dalam meningkatkan efisiensi, produktivitas, dan kinerja mereka melalui pemanfaatan teknologi informasi. Layanan yang disediakan oleh divisi ini mungkin mencakup pengembangan situs web, aplikasi mobile, sistem manajemen pelanggan (CRM), e-commerce, dan konsultasi IT untuk bisnis.',
         ]);
+        VisitelAmType::create([
+            'name'=>'NOT A AM',
+            'description'=>'...',
+        ]);
 
 
         // USER
-        VisitelUser::factory(env('JML_USER'))->create();
+        // VisitelUser::factory(env('JML_USER'))->create();
 
 
         // CLIENT
-        VisitelClient::factory(env('JML_CLIENT'))->create();
+        // VisitelClient::factory(env('JML_CLIENT'))->create();
 
 
         // REPORT
-        VisitelReport::factory(env('JML_REPORT'))->create();
+        // VisitelReport::factory(env('JML_REPORT'))->create();
     }
 }

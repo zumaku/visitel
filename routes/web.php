@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProviderController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,15 @@ Route::get('/playground', function () {
 Route::get('/my-login', function () {
     return Inertia::render('MyLogin');
 });
+
+
+
+
+Route::get('/auth/redirect', [ProviderController::class, 'redirect']);
+Route::get('/auth/callback', [ProviderController::class, 'callback']);
+
+
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
