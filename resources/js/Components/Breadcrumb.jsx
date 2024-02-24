@@ -1,5 +1,4 @@
 import { HomeIcon, DocumentDuplicateIcon, BuildingOfficeIcon, DocumentTextIcon, UserGroupIcon, UserIcon } from "@heroicons/react/24/outline" 
-import style from "@/styles"
 
 const returnIcon = (icon) => {
     if(icon === "home") return <HomeIcon className='text-primary w-5 h-5' />
@@ -18,9 +17,9 @@ const Breadcrumb = ({ items }) => {
                 <li key={index}>
                     <a href={item.link} className='flex items-center'>
                         {returnIcon(item.icon)}
-                        <p className={`${style.bodySmHeavy} pl-1`}>{item.text}</p>
+                        <p className={`text-body-sm-heavy pl-1`}>{item.text}</p>
                         {index < items.length - 1 && (
-                            <p className={`${style.bodySmHeavy} px-1`}>/</p>
+                            <p className={`text-body-sm-heavy px-1`}>/</p>
                         )}
                     </a>
                 </li>
