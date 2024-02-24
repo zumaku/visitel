@@ -1,4 +1,3 @@
-import style from '@/styles';
 import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 
 export default function SideMenuButton({ name, link, isOpen = true, isActive = false, children, className }) {
@@ -13,7 +12,7 @@ export default function SideMenuButton({ name, link, isOpen = true, isActive = f
             `}
         >
             {children} {/* Menampilkan children di dalam komponen */}
-            {isOpen && <p className={`${style.bodyHeavy} text-white ml-4`}>{name}</p>}
+            {isOpen && <p className={`text-body-heavy text-white ml-4`}>{name}</p>}
         </a>
     );
 }
