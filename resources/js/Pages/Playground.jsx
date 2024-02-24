@@ -7,6 +7,7 @@ import SideOpen from '@/Components/icons/SideOpen';
 import Breadcrumb from '@/Components/Breadcrumb';
 import Attribute from '@/Components/Attribute';
 import AmReportCard from '@/Components/AmReportCard';
+import AmCalender from '@/Components/AmCalender';
 
 export default function Playground() {
     const [isOpen, setIsOpen] = useState(false)
@@ -74,15 +75,14 @@ export default function Playground() {
 
                     {/* Laporan Terbaru */}
                     <h2 className={`text-h2 mb-4`}>Laporan Terbaru</h2>
-                    <div className="flex flex-wrap w-full justify-between mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-1 w-full justify-between mb-8">
                         <AmReportCard link="/" title="Laporan #1 PT Jomblo Indonesia" client="PT Jomblo Indonesia" date="kemarin" />
                         <AmReportCard link="/" title="Laporan #1 PT Jomblo Indonesia" client="PT Jomblo Indonesia" date="kemarin" />
                         <AmReportCard link="/" title="Laporan #1 PT Jomblo Indonesia" client="PT Jomblo Indonesia" date="kemarin" />
                     </div>
 
                     {/* Kalender */}
-                    <h2 className={`text-h2 mb-4`}>Laporan Terbaru</h2>
-                    
+                    <AmCalender />
                 </main>
             </section>
         </div>
