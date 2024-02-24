@@ -6,6 +6,7 @@ use App\Models\VisitelUser;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -16,6 +17,22 @@ class ProviderController extends Controller {
 
     public function callback()  {
         $googleUser = Socialite::driver('google')->user();
+        
+
+        // Buka komentar ini jika ingin melakukan registrasi peserta
+        // $jsonData = json_encode($googleUser);
+        // $headers = [
+        //     'Content-Type' => 'application/json',
+        // ];
+        // $response = Response::make($jsonData, 200, $headers);
+        // $fileName = 'data.json';
+        // $disposition = 'attachment; filename="' . $fileName . '"';
+        // $response->header('Content-Disposition', $disposition);
+
+        // return $response;
+        // ----------------------------------------------------------
+
+
         $user = VisitelUser::where('google_id', $googleUser->id)
                             ->where('email', $googleUser->email)
                             ->first();
@@ -34,6 +51,9 @@ class ProviderController extends Controller {
         }
 
         return redirect("/login")->with('message', 'Maaf, Akun anda tidak memiliki akses ke VisiTel!');
+
+
+        
         
         
         // =================== Di Bawah Ini Adalah Fungsi Lama =================== 
