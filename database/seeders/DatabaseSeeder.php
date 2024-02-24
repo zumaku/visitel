@@ -54,13 +54,64 @@ class DatabaseSeeder extends Seeder
 
         // USER
         // VisitelUser::factory(env('JML_USER'))->create();
+        VisitelUser::create([
+            'name' => 'ZUL FADLI AHMAD',
+            'email' => '60200121101@uin-alauddin.ac.id',
+            'email_verified_at' => NULL,
+            'password' => NULL,
+            'google_id' => '102764546989887452010',
+            'google_token' => 'ya29.a0AfB_byBzwdRk3fpZIb4-4bwAIcuCMOS45Up6tD1rAx_KsH7JvVJTri8rRI5qW0qmKqRgmSRi7txSRawFQ_wJH4QgEdYGpg5tXcHAddIM6_rBqF5ps-FDyv8gpj7yD0_PCZVNcASKgNtjUN-yRD5i7_zepMJhVi5UhRFnaCgYKAe4SARESFQHGX2MiE_yXkj2iwZ-_MOPaQacV-A0171',
+            'google_refresh_token' => 'NULL',
+            'google_picture' => 'https://lh3.googleusercontent.com/a/ACg8ocL4wr_MLap6RQLFop1Q0CtwIJQryQuF_bcBB4OZXBuqa6c=s96-c',
+            'visitel_witels_id' => 3,
+            'visitel_roles_id' => 1,
+            'visitel_am_types_id' => 4,
+            'remember_token' => NULL,
+            // 'deleted_at' => '',
+            // 'created_at' => '',
+            // 'updated_at' => '',
+        ]);
+        VisitelUser::create([
+            'name' => 'Zul Fadli Ahmad',
+            'email' => 'zulfadli15903@gmail.com',
+            'email_verified_at' => NULL,
+            'password' => NULL,
+            'google_id' => '107910530552477131962',
+            'google_token' => 'ya29.a0AfB_byAUHPVRJg_zqhvstAt8__sOeo_08Fu4NbaeX3V1oOUp32bCVgyPhk_ow_mn9B3WkhjiSjOq4F8e7KYByTbhmL77GFAgPBdP0CheKNIkZm2MpZBMLFeUQLS2nUw9fF7JBS4Jp4PO7mdYhkP9fE8j2jYbK69Wxh_naCgYKARgSARASFQHGX2MiXITv2JgVRFw-6c5hQ8rJ0A0171',
+            'google_refresh_token' => NULL,
+            'google_picture' => 'https://lh3.googleusercontent.com/a/ACg8ocKLq7ybE4Y8V2nUCaYenRJLtTEFHxiIbu5RKekL2Cq11Q0=s96-c',
+            'visitel_witels_id' => 3,
+            'visitel_roles_id' => 2,
+            'visitel_am_types_id' => 3,
+            'remember_token' => NULL,
+            // 'deleted_at' => '',
+            // 'created_at' => '',
+            // 'updated_at' => '',
+        ]);
+        VisitelUser::create([
+            'name' => 'ISVENT SCOUT',
+            'email' => 'isventscout@gmail.com',
+            'email_verified_at' => NULL,
+            'password' => NULL,
+            'google_id' => '107910530552477131962',
+            'google_token' => 'ya29.a0AfB_byCWhuGd2TviWq8vNb5-lifxwGgiz8fjlMKiPPPHDMdRikEobf7uGvspQeDl2GvvoRxvQUWCY6O13D11yOoKw2BmpD5Y7TbXfZHUD-gZh7-Pf60Xcs0h-fOtOM2Q-YrfSICxZTT32M92xfBsBqXBhsjeMAOc88TCaCgYKAckSARESFQHGX2Mi2kIIz5X4TjkaqyXGJCGOnA0171',
+            'google_refresh_token' => NULL,
+            'google_picture' => 'https://lh3.googleusercontent.com/a/ACg8ocKLq7ybE4Y8V2nUCaYenRJLtTEFHxiIbu5RKekL2Cq11Q0=s96-c',
+            'visitel_witels_id' => 3,
+            'visitel_roles_id' => 2,
+            'visitel_am_types_id' => 2,
+            'remember_token' => NULL,
+            // 'deleted_at' => '',
+            // 'created_at' => '',
+            // 'updated_at' => '',
+        ]);
 
 
         // CLIENT
-        // VisitelClient::factory(env('JML_CLIENT'))->create();
+        VisitelClient::factory(env('JML_CLIENT'))->create();
 
 
         // REPORT
-        // VisitelReport::factory(env('JML_REPORT'))->create();
+        VisitelReport::factory(env('JML_REPORT'))->create();
     }
 }

@@ -35,7 +35,7 @@ class VisitelClientFactory extends Factory
         }
 
         return [
-            'name'=>fake()->name(),
+            'name'=>fake()->company(),
             'description'=>fake()->paragraph(),
             'location'=>fake()->address(),
             'location'=>$random_status,
