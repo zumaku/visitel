@@ -11,3 +11,51 @@
     font-family: TelkomselBatikSans-Bold;
     src: url(../fonts/TelkomselBatikSans-Bold.ttf) format("truetype");
 }
+
+@layer components {
+    .text-h1 {
+        @apply font-telkombatik text-[38px] md:text-5xl leading-[48px] md:leading-[64px];
+    }
+    .text-h2 {
+        @apply font-telkombatik text-[28px] md:text-[32px] leading-10 md:leading-[48px];
+    }
+    .text-h3 {
+        @apply font-telkombatik text-xl md:text-2xl leading-9 md:leading-10;
+    }
+    .text-body {
+        @apply font-poppins text-[13px] md:text-base text-tertiary;
+    }
+    .text-body-heavy {
+        @apply font-poppins text-[13px] md:text-base font-semibold text-tertiary;
+    }
+    .text-body-sm {
+        @apply font-poppins text-[10px] md:text-sm text-tertiary;
+    }
+    .text-body-sm-heavy {
+        @apply font-poppins text-[10px] md:text-sm font-semibold text-tertiary;
+    }
+    .text-link {
+        @apply font-poppins text-[13px] md:text-base font-semibold underline text-tertiary;
+    }
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
+    .flex-start {
+        @apply flex justify-center items-start;
+    }
+    .padding-x {
+        @apply md:px-24 sm:px-16 px-6;
+    }
+    .padding-y {
+        @apply md:px-24 sm:py-16 py-6;
+    }
+    .padding {
+        @apply sm:px-16 px-6 sm:py-12 py-4;
+    }
+    .margin-x {
+        @apply sm:mx-16 mx-6;
+    }
+    .margin-y {
+        @apply sm:my-16 my-6;
+    }
+}
