@@ -2,7 +2,7 @@ import { CheckCircleIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/r
 import { useState } from "react";
 import Attribute from "./Attribute";
 
-export default function AmCalender() {
+export default function AmCalender({data}) {
     const [date, setDate] = useState(new Date());
 
     const namaHari = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"]
@@ -44,7 +44,9 @@ export default function AmCalender() {
         const daysCount = daysInMonth();
         const startDay = firstDayOfMonth();
         const today = new Date().getDate();
-
+        const thisMonth = date.getMonth();
+        const thisYear = date.getFullYear();
+    
         for (let i = 0; i < startDay; i++) {
             days.push(
                 <div
@@ -53,40 +55,47 @@ export default function AmCalender() {
                 ></div>
             );
         }
-
+    
         for (let day = 1; day <= daysCount; day++) {
-            const isToday =
-                day === today &&
-                date.getMonth() === new Date().getMonth() &&
-                date.getFullYear() === new Date().getFullYear();
+            const currentDate = new Date(thisYear, thisMonth, day);
+            const isToday = day === today && thisMonth === new Date().getMonth() && thisYear === new Date().getFullYear();
+    
+            // Filter data laporan yang cocok dengan tanggal saat ini
+            const matchingReports = data.filter(report => {
+                const reportDate = new Date(report.date);
+                return reportDate.getDate() === currentDate.getDate() &&
+                    reportDate.getMonth() === currentDate.getMonth() &&
+                    reportDate.getFullYear() === currentDate.getFullYear();
+            });
+    
             days.push(
                 <div
                     key={day}
                     className={`h-full w-full p-2 flex flex-col items-start justify-start text-center text-body border border-tertiary `}
                 >
-                    <div className={`${
-                        isToday ? "bg-primary text-white" : ""
-                    } mb-2 p-1 rounded-full aspect-square w-8`}>
+                    <div className={`${isToday ? "bg-primary text-white" : ""} mb-2 p-1 rounded-full aspect-square w-8`}>
                         <p>{day}</p>
                     </div>
-                    <a href="" className="flex flex-col justify-start items-start text-body-sm p-2 border border-tertiary w-full rounded-md bg-white hover:bg-secondary-100 mb-2">
-                        <p className="text-body-sm-heavy text-start">Title Laporan</p>
-                        <Attribute name="Done">
-                            <CheckCircleIcon className="text-primary w-4" />
-                        </Attribute> 
-                    </a>
-                    <a href="" className="flex flex-col justify-start items-start text-body-sm p-2 border border-tertiary w-full rounded-md bg-white hover:bg-secondary-100 mb-2">
-                        <p className="text-body-sm-heavy text-start">Title Laporan</p>
-                        <Attribute name="Done">
-                            <CheckCircleIcon className="text-primary w-4" />
-                        </Attribute>
-                    </a>
+                    {/* Tampilkan data laporan jika ada yang cocok dengan tanggal saat ini */}
+                    {matchingReports.map((laporan, index) => (
+                        <a
+                            key={index}
+                            href="#"
+                            className="flex flex-col justify-start items-start text-body-sm p-2 border border-tertiary w-full rounded-md bg-white hover:bg-secondary-100 mb-2"
+                        >
+                            <p className="text-body-sm-heavy text-start">{laporan.name}</p>
+                            <Attribute name={laporan.status} link={laporan.slug}>
+                                <CheckCircleIcon className="text-primary w-4" />
+                            </Attribute>
+                        </a>
+                    ))}
                 </div>
             );
         }
-
+    
         return days;
     };
+    
 
     return (
         <div className="w-full mx-auto text-tertiary">

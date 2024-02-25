@@ -3,8 +3,8 @@ import AmReportCard from "@/Components/AmReportCard";
 import AmCalender from "@/Components/AmCalender";
 import { Head } from "@inertiajs/react";
 
-export default function AmDashboard({ auth, laporanTerbaru }) {
-    console.log(laporanTerbaru);
+export default function AmDashboard({ auth, semua_laporan }) {
+    const laporan_terbaru = semua_laporan.slice(0, 3);
 
     return (
         <AmLayout
@@ -27,7 +27,7 @@ export default function AmDashboard({ auth, laporanTerbaru }) {
             {/* Laporan Terbaru */}
             <h2 className={`text-h2 mb-4`}>Laporan Terbaru</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-1 w-full justify-between mb-8">
-                {laporanTerbaru.map((laporan, index) => (
+                {laporan_terbaru.map((laporan, index) => (
                     <AmReportCard
                         key={index}
                         link={laporan.slug}
@@ -39,7 +39,7 @@ export default function AmDashboard({ auth, laporanTerbaru }) {
             </div>
 
             {/* Kalender */}
-            <AmCalender />
+            <AmCalender data={semua_laporan} />
         </AmLayout>
     );
 }

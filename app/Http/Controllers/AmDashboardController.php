@@ -17,8 +17,8 @@ class AmDashboardController extends Controller
         $user_id = Auth::id();
         $laporan_terbaru = VisitelReport::where('visitel_users_id', $user_id)
                             ->orderBy('date', 'desc')
-                            ->limit(3)
-                            ->get(['visitel_clients_id', 'name', 'slug', 'date', 'activity']);
+                            // ->limit(3)
+                            ->get(['visitel_clients_id', 'name', 'slug', 'status', 'date', 'activity']);
 
         $laporan_dengan_nama = [];
         foreach ($laporan_terbaru as $laporan) {
@@ -27,15 +27,17 @@ class AmDashboardController extends Controller
                 'date' => $laporan->date,
                 'name' => $laporan->name,
                 'slug' => $laporan->slug,
+                'status' => $laporan->status,
                 'activity' => $laporan->activity,
-                'client_id' => $laporan->visitel_clients_id,
+                // 'client_id' => $laporan->visitel_clients_id,
                 'client_name' => $clientName,
             ];
         }
-        // dd($laporan_terbaru);
+
+
 
         return Inertia::render('AmDashboard', [
-            'laporanTerbaru' => $laporan_dengan_nama,
+            'semua_laporan' => $laporan_dengan_nama,
         ]);
     }
 }
