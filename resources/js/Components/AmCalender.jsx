@@ -71,7 +71,7 @@ export default function AmCalender({data}) {
             days.push(
                 <div
                     key={day}
-                    className={`h-full w-full p-2 flex flex-col items-start justify-start text-center text-body border border-tertiary `}
+                    className={`h-full min-h-32 w-full p-2 flex flex-col items-start justify-start text-center text-body border border-tertiary `}
                 >
                     <div className={`${
                         isToday ? "bg-primary text-white" : ""
