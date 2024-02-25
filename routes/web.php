@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmDashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProviderController;
 use Illuminate\Foundation\Application;
@@ -38,9 +39,11 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+    
+Route::get('/dashboard', [AmDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

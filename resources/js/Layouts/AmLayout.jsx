@@ -1,21 +1,26 @@
 import { useState } from 'react';
 import { MarkLogo, SecondaryLogo } from '@/Components/logos';
-import { Head } from '@inertiajs/react';
-import { HomeIcon, DocumentDuplicateIcon, BuildingOfficeIcon, EllipsisHorizontalCircleIcon, ChevronLeftIcon, ChevronRightIcon, CalendarDaysIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, DocumentDuplicateIcon, BuildingOfficeIcon, ArrowLeftStartOnRectangleIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { SideMenuButton } from '@/Components/buttons';
 import SideOpen from '@/Components/icons/SideOpen';
 import Breadcrumb from '@/Components/Breadcrumb';
-import AmReportCard from '@/Components/AmReportCard';
-import AmCalender from '@/Components/AmCalender';
+import { Link } from '@inertiajs/react';
 
-export default function Playground() {
+export default function AmLayout({user, breadcrumbItem, children}) {
+    const username = user.name.split(" ").slice(0, 2).join(' ');
     const [isOpen, setIsOpen] = useState(false)
+
+    const handleLogout = () => {
+        // Mengirim permintaan POST ke route logout
+        Inertia.post(route('logout'));
+    };
 
     return (
         <div className='flex w-full h-screen overflow-hidden'>
             <aside className={`${
                 isOpen ? 'w-64' : 'w-20'
             } px-2 bg-tertiary-800 text-white  py-8 flex flex-col justify-between items-start transition-all relative`}>
+                {/* Links */}
                 <div className="w-full">
                     <a href="/" className={`px-4 w-full flex ${isOpen ? 'justify-start' : 'justify-center'} mb-12`}>
                         {isOpen ? <SecondaryLogo className='w-32' primary={true} /> : <MarkLogo className='w-16' primary={true} />}
@@ -31,12 +36,20 @@ export default function Playground() {
                         <BuildingOfficeIcon className='h-6 w-6'/>
                     </SideMenuButton>
                 </div>
-                <div className={`px-5 w-full flex ${isOpen ? "justify-between" : "justify-center"} items-center hover:cursor-pointer`}>
+            
+                {/* Profile */}
+                <div className={`px-5 w-full flex ${isOpen ? "justify-between" : "justify-center"} group items-center hover:cursor-pointer`}>
                     <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-full mr-2 bg-gradient-to-r from-fuchsia-500 to-cyan-500"></div>
-                        {isOpen && <p className={`text-body-heavy text-white`}>Kimi No Nawa</p>}
+                        <div className="w-8 h-8 rounded-full mr-2 bg-gradient-to-r from-fuchsia-500 to-cyan-500 overflow-hidden">
+                            <img src={user.google_picture} alt="" />
+                        </div>
+                        {isOpen && <p className={`text-body-heavy text-white`}>{username}</p>}
                     </div>
-                    {isOpen && <EllipsisHorizontalCircleIcon className='h-6 w-6'/>}
+                    {isOpen && (
+                        <Link href={route('logout')} method="post" as="button" >
+                            <ArrowLeftStartOnRectangleIcon className='h-6 w-6 group-hover:text-primary'/>
+                        </Link>
+                    )}
                 </div>
 
                 {/* Toggle */}
@@ -56,36 +69,18 @@ export default function Playground() {
                         </a>
                     </div>
                     <Breadcrumb
-                        items={[
-                            { link: '/dashboard', text: 'Beranda', icon: 'home' },
-                            // { link: '/laporanku', text: 'Laporanku', icon: 'docs' },
-                            // { url: '/products/item123', text: 'Item 123' }
-                        ]}
+                        // items={[
+                        //     { link: '/dashboard', text: 'Beranda', icon: 'home' },
+                        //     { link: '/laporanku', text: 'Laporanku', icon: 'docs' },
+                        //     { link: '/products/item123', text: 'Item 123' }
+                        // ]}
+                        items={breadcrumbItem}
                     />
                 </nav>
 
                 {/* Main Content */}
-                <main>
-                    <Head title="Beranda" />
-
-                    <div className={`padding-x pt-28 w-full h-full scroll-m-3 overflow-y-scroll text-tertiary`}>
-                        <h1 className={`text-h1`}>
-                            <span className='text-primary'>Hi,</span> Zuma
-                        </h1>
-                        <p className={`text-body mb-4`}>Account Manager Divisi Bissunis Service at Witel Makassar, Sul-Sel.</p>
-                        <div className="h-1 w-full bg-disable mb-4"></div>
-
-                        {/* Laporan Terbaru */}
-                        <h2 className={`text-h2 mb-4`}>Laporan Terbaru</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 w-full justify-between mb-8">
-                            <AmReportCard link="/" title="Laporan #1 PT Jomblo Indonesia" client="PT Jomblo Indonesia" date="kemarin" />
-                            <AmReportCard link="/" title="Laporan #1 PT Jomblo Indonesia" client="PT Jomblo Indonesia" date="kemarin" />
-                            <AmReportCard link="/" title="Laporan #1 PT Jomblo Indonesia" client="PT Jomblo Indonesia" date="kemarin" />
-                        </div>
-
-                        {/* Kalender */}
-                        <AmCalender />
-                    </div>
+                <main className={`padding-x pt-28 w-full h-full scroll-m-3 overflow-y-scroll text-tertiary`}>
+                    {children}
                 </main>
             </section>
         </div>
