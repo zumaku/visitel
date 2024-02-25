@@ -1,4 +1,4 @@
-import { CheckCircleIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ChevronLeftIcon, ChevronRightIcon, PauseCircleIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Attribute from "./Attribute";
 
@@ -64,18 +64,21 @@ export default function AmCalender({data}) {
             const matchingReports = data.filter(report => {
                 const reportDate = new Date(report.date);
                 return reportDate.getDate() === currentDate.getDate() &&
-                    reportDate.getMonth() === currentDate.getMonth() &&
-                    reportDate.getFullYear() === currentDate.getFullYear();
+                        reportDate.getMonth() === currentDate.getMonth() &&
+                        reportDate.getFullYear() === currentDate.getFullYear();
             });
-    
+
             days.push(
                 <div
                     key={day}
                     className={`h-full w-full p-2 flex flex-col items-start justify-start text-center text-body border border-tertiary `}
                 >
-                    <div className={`${isToday ? "bg-primary text-white" : ""} mb-2 p-1 rounded-full aspect-square w-8`}>
+                    <div className={`${
+                        isToday ? "bg-primary text-white" : ""
+                    } mb-2 p-1 rounded-full aspect-square w-8`}>
                         <p>{day}</p>
                     </div>
+
                     {/* Tampilkan data laporan jika ada yang cocok dengan tanggal saat ini */}
                     {matchingReports.map((laporan, index) => (
                         <a
@@ -84,8 +87,10 @@ export default function AmCalender({data}) {
                             className="flex flex-col justify-start items-start text-body-sm p-2 border border-tertiary w-full rounded-md bg-white hover:bg-secondary-100 mb-2"
                         >
                             <p className="text-body-sm-heavy text-start">{laporan.name}</p>
-                            <Attribute name={laporan.status} link={laporan.slug}>
-                                <CheckCircleIcon className="text-primary w-4" />
+                            <Attribute name={laporan.status} slug={laporan.slug}>
+                                {laporan.status === "Terencana" && <PauseCircleIcon className="text-primary w-4" /> }
+                                {laporan.status === "Proses" && <PlayCircleIcon className="text-primary w-4" /> }
+                                {laporan.status === "Selesai" && <CheckCircleIcon className="text-primary w-4" /> }
                             </Attribute>
                         </a>
                     ))}

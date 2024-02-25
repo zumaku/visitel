@@ -3,14 +3,16 @@ import { CalendarDaysIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/o
 
 export default function AmReportCard ({link, title, activity, date}) {
     return (
-        <a href={`/laporan/${link}`} class="block w-full p-6 bg-white border border-tertiary rounded-lg shadow hover:bg-secondary-100 h-fit">
+        <a href={`/laporan/${link}`} class="flex flex-col justify-between w-full h-full p-6 bg-white border border-tertiary rounded-lg shadow hover:bg-secondary-100">
             <h5 class={`text-h3 mb-2 font-bold tracking-tight`}>{title}</h5>
-            <Attribute name={activity} >
-                <ChatBubbleLeftRightIcon className='w-6 h-6 text-primary' />
-            </Attribute>
-            <Attribute name={date} >
-                <CalendarDaysIcon className='w-6 h-6 text-primary' />
-            </Attribute>
+            <div>
+                <Attribute name={activity} >
+                    <ChatBubbleLeftRightIcon className='w-6 h-6 text-primary' />
+                </Attribute>
+                <Attribute name={date} >
+                    <CalendarDaysIcon className='w-6 h-6 text-primary' />
+                </Attribute>
+            </div>
         </a>
     )
 }

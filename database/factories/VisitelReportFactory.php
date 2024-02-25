@@ -98,16 +98,16 @@ class VisitelReportFactory extends Factory
         $status = "";
         switch (rand(1,3)){
             case  1:
-                $status = "Not Started";
+                $status = "Terencana";
                 break;
             case  2:
-                $status = "In Proggress";
+                $status = "Proses";
                 break;
             case  3:
-                $status = "Done";
+                $status = "Selesai";
                 break;
             default:
-                $status = "Not Started";
+                $status = "Terencana";
         }
 
         $ups_or_sus = "";

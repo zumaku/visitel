@@ -26,7 +26,7 @@ export default function AmDashboard({ auth, semua_laporan }) {
 
             {/* Laporan Terbaru */}
             <h2 className={`text-h2 mb-4`}>Laporan Terbaru</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-1 w-full justify-between mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 w-full justify-between mb-8">
                 {laporan_terbaru.map((laporan, index) => (
                     <AmReportCard
                         key={index}
