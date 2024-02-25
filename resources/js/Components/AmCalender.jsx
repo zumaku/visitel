@@ -79,7 +79,7 @@ export default function AmCalender() {
                         <p className="text-body-sm-heavy text-start">Title Laporan</p>
                         <Attribute name="Done">
                             <CheckCircleIcon className="text-primary w-4" />
-                        </Attribute> 
+                        </Attribute>
                     </a>
                 </div>
             );
