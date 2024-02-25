@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('visitel_reports', function (Blueprint $table) {
             $table->id();
-            // $table->string('name', 255);
+            $table->string('name', 255);
+            $table->string('slug', 255);
             $table->date('date');
             $table->foreignId('visitel_users_id')->constrained();
             $table->foreignId('visitel_clients_id')->constrained();
