@@ -1,4 +1,4 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { GoogleIcon } from '../../Components/icons';
 import { PrimaryLogo } from '@/Components/logos';
 import { useState, useEffect } from 'react';

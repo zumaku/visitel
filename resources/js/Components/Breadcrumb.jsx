@@ -1,4 +1,5 @@
 import { HomeIcon, DocumentDuplicateIcon, BuildingOfficeIcon, DocumentTextIcon, UserGroupIcon, UserIcon } from "@heroicons/react/24/outline" 
+import { Link } from "@inertiajs/react"
 
 const returnIcon = (icon) => {
     if(icon === "home") return <HomeIcon className='text-primary w-5 h-5' />
@@ -15,13 +16,13 @@ const Breadcrumb = ({ items }) => {
         <ul className="flex">
             {items.map((item, index) => (
                 <li key={index}>
-                    <a href={item.link} className='flex items-center'>
+                    <Link href={item.link} className='flex items-center'>
                         {returnIcon(item.icon)}
                         <p className={`text-body-sm-heavy pl-1`}>{item.text}</p>
                         {index < items.length - 1 && (
                             <p className={`text-body-sm-heavy px-1`}>/</p>
                         )}
-                    </a>
+                    </Link>
                 </li>
             ))}
         </ul>

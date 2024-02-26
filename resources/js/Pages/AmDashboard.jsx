@@ -1,5 +1,5 @@
 import { MyButton } from "@/Components/buttons";
-import AmLayout from "@/Layouts/AmLayout";
+import { AmLayout } from "@/Layouts";
 import { AmReportCard, AmCalender } from "@/Components/";
 import { Head } from "@inertiajs/react";
 
