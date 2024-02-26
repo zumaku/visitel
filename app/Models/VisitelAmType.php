@@ -9,7 +9,7 @@ class VisitelAmType extends Model
 {
     use HasFactory;
 
-    public function visitelUser()
+    public function visitel_user()
     {
         return $this->belongsTo(VisitelUser::class);
     }

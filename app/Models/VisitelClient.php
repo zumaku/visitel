@@ -19,7 +19,7 @@ class VisitelClient extends Model
         return $this->belongsToMany(VisitelUser::class);
     }
 
-    public function reports()
+    public function visitel_reports()
     {
         return $this->hasMany(VisitelReport::class);
     }

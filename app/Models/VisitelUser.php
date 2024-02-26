@@ -52,27 +52,27 @@ class VisitelUser extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function role()
+    public function visitel_role()
     {
         return $this->belongsTo(VisitelRole::class);
     }
 
-    public function witel()
+    public function visitel_witel()
     {
         return $this->belongsTo(VisitelWitel::class);
     }
 
-    public function visitelAmType()
+    public function visitel_am_type()
     {
         return $this->hasOne(VisitelAmType::class);
     }
 
-    public function clients()
+    public function visitel_clients()
     {
         return $this->belongsToMany(VisitelClient::class);
     }
 
-    public function reports()
+    public function visitel_reports()
     {
         return $this->hasMany(VisitelReport::class);
     }

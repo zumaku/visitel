@@ -9,7 +9,7 @@ class VisitelRole extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function visitel_user()
     {
         return $this->hasOne(VisitelUser::class);
     }

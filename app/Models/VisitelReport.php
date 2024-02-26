@@ -9,12 +9,12 @@ class VisitelReport extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function visitel_user()
     {
         return $this->belongsTo(VisitelUser::class);
     }
 
-    public function client()
+    public function visitel_client()
     {
         return $this->belongsTo(VisitelClient::class);
     }
