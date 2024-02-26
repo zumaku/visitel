@@ -11,12 +11,12 @@ class VisitelWitel extends Model
 
     public function visitel_users()
     {
-        return $this->hasMany(VisitelUser::class);
+        return $this->hasMany(VisitelUser::class, 'visitel_witels_id');
     }
 
     public function visitel_clients()
     {
-        return $this->hasMany(VisitelClient::class);
+        return $this->hasMany(VisitelClient::class, 'visitel_witel_id');
     }
 
     public function visitel_reports()

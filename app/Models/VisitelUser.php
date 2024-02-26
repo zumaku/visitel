@@ -54,26 +54,26 @@ class VisitelUser extends Authenticatable
 
     public function visitel_role()
     {
-        return $this->belongsTo(VisitelRole::class);
+        return $this->belongsTo(VisitelRole::class, 'id');
     }
 
     public function visitel_witel()
     {
-        return $this->belongsTo(VisitelWitel::class);
+        return $this->belongsTo(VisitelWitel::class, 'id');
     }
 
     public function visitel_am_type()
     {
-        return $this->hasOne(VisitelAmType::class);
+        return $this->hasOne(VisitelAmType::class, 'id');
     }
 
     public function visitel_clients()
     {
-        return $this->belongsToMany(VisitelClient::class);
+        return $this->belongsToMany(VisitelClient::class, 'id');
     }
 
     public function visitel_reports()
     {
-        return $this->hasMany(VisitelReport::class);
+        return $this->hasMany(VisitelReport::class, 'visitel_user_id');
     }
 }

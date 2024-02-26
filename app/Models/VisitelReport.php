@@ -11,12 +11,12 @@ class VisitelReport extends Model
 
     public function visitel_user()
     {
-        return $this->belongsTo(VisitelUser::class);
+        return $this->belongsTo(VisitelUser::class, 'id');
     }
 
     public function visitel_client()
     {
-        return $this->belongsTo(VisitelClient::class);
+        return $this->belongsTo(VisitelClient::class, 'id');
     }
 }
 

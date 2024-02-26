@@ -11,6 +11,6 @@ class VisitelAmType extends Model
 
     public function visitel_user()
     {
-        return $this->belongsTo(VisitelUser::class);
+        return $this->belongsTo(VisitelUser::class, 'visitel_am_types_id');
     }
 }

@@ -21,6 +21,6 @@ class VisitelClient extends Model
 
     public function visitel_reports()
     {
-        return $this->hasMany(VisitelReport::class);
+        return $this->hasMany(VisitelReport::class, 'visitel_client_id');
     }
 }

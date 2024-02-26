@@ -11,6 +11,6 @@ class VisitelRole extends Model
 
     public function visitel_user()
     {
-        return $this->hasOne(VisitelUser::class);
+        return $this->hasOne(VisitelUser::class, 'visitel_roles_id');
     }
 }
