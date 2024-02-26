@@ -49,7 +49,7 @@ export default function AmDashboard({ auth, semua_laporan }) {
             </div>
 
             {/* Kalender */}
-            <AmCalender data={semua_laporan} />
+            <AmCalender data={semua_laporan} className="my-12" />
         </AmLayout>
     );
 }

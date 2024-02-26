@@ -3,7 +3,7 @@ import { useState } from "react";
 import Attribute from "./Attribute";
 import { Link } from "@inertiajs/react";
 
-export default function AmCalender({data}) {
+export default function AmCalender({data, className = '', ...props}) {
     const [date, setDate] = useState(new Date());
 
     const namaHari = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"]
@@ -104,7 +104,7 @@ export default function AmCalender({data}) {
     
 
     return (
-        <div className="w-full mx-auto text-tertiary">
+        <div className={`w-full mx-auto text-tertiary ${className}`} {...props} >
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-h2">Kalender</h2>
                 <div className="flex">
