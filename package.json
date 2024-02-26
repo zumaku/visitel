@@ -20,6 +20,8 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
-        "@heroicons/react": "^2.1.1"
+        "@heroicons/react": "^2.1.1",
+        "@tanstack/react-table": "^8.12.0",
+        "react-table": "^7.8.0"
     }
 }

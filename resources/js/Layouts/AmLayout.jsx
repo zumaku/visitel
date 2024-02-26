@@ -6,7 +6,7 @@ import SideOpen from '@/Components/icons/SideOpen';
 import Breadcrumb from '@/Components/Breadcrumb';
 import { Link } from '@inertiajs/react';
 
-export default function AmLayout({user, breadcrumbItem, children}) {
+export default function AmLayout({user, breadcrumbItem, children, active}) {
     const username = user.name.split(" ").slice(0, 2).join(' ');
     const [isOpen, setIsOpen] = useState(false)
 
@@ -26,13 +26,13 @@ export default function AmLayout({user, breadcrumbItem, children}) {
                         {isOpen ? <SecondaryLogo className='w-32' primary={true} /> : <MarkLogo className='w-16' primary={true} />}
                     </a>
 
-                    <SideMenuButton name={"Beranda"} link={"/beranda"} isOpen={isOpen} isActive={true} className='mb-2' >
+                    <SideMenuButton name={"Dashboard"} link={"/dashboard"} isOpen={isOpen} isActive={active == "beranda" ? true : false} className='mb-2' >
                         <HomeIcon className='h-6 w-6'/>
                     </SideMenuButton>
-                    <SideMenuButton name={"Laporanku"} link={"/laporanku"} isOpen={isOpen} isActive={false} className='mb-2' >
+                    <SideMenuButton name={"Laporan"} link={"/laporan"} isOpen={isOpen} isActive={active == "laporan" ? true : false} className='mb-2' >
                         <DocumentDuplicateIcon className='h-6 w-6'/>
                     </SideMenuButton>
-                    <SideMenuButton name={"KLien"} link={"/klien"} isOpen={isOpen} isActive={false} className='mb-2' >
+                    <SideMenuButton name={"Klien"} link={"/klien"} isOpen={isOpen} isActive={active == "klien" ? true : false} className='mb-2' >
                         <BuildingOfficeIcon className='h-6 w-6'/>
                     </SideMenuButton>
                 </div>
