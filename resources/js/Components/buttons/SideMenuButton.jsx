@@ -1,8 +1,9 @@
 import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
+import { Link } from '@inertiajs/react';
 
 export default function SideMenuButton({ name, link, isOpen = true, isActive = false, children, className }) {
     return (
-        <a
+        <Link
             href={link}
             className={`
                 flex justify-start items-center px-5 py-3 rounded-lg transition-all group  ${
@@ -13,6 +14,6 @@ export default function SideMenuButton({ name, link, isOpen = true, isActive = f
         >
             {children} {/* Menampilkan children di dalam komponen */}
             {isOpen && <p className={`text-body-heavy text-white ml-4`}>{name}</p>}
-        </a>
+        </Link>
     );
 }
