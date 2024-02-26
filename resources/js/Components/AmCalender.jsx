@@ -1,6 +1,7 @@
 import { CheckCircleIcon, ChevronLeftIcon, ChevronRightIcon, PauseCircleIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Attribute from "./Attribute";
+import { Link } from "@inertiajs/react";
 
 export default function AmCalender({data}) {
     const [date, setDate] = useState(new Date());
@@ -81,18 +82,18 @@ export default function AmCalender({data}) {
 
                     {/* Tampilkan data laporan jika ada yang cocok dengan tanggal saat ini */}
                     {matchingReports.map((laporan, index) => (
-                        <a
+                        <Link
                             key={index}
-                            href="#"
+                            href={`/laporan/${laporan.slug}`}
                             className="flex flex-col justify-start items-start text-body-sm p-2 border border-tertiary w-full rounded-md bg-white hover:bg-secondary-100 mb-2"
                         >
                             <p className="text-body-sm-heavy text-start">{laporan.name}</p>
-                            <Attribute name={laporan.status} slug={laporan.slug}>
+                            <Attribute name={laporan.status}>
                                 {laporan.status === "Terencana" && <PauseCircleIcon className="text-primary w-4" /> }
                                 {laporan.status === "Proses" && <PlayCircleIcon className="text-primary w-4" /> }
                                 {laporan.status === "Selesai" && <CheckCircleIcon className="text-primary w-4" /> }
                             </Attribute>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             );
