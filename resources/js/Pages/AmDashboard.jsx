@@ -9,8 +9,9 @@ export default function AmDashboard({ auth, semua_laporan }) {
     return (
         <AmLayout
             user={auth.user}
+            active={"beranda"}
             breadcrumbItem={[
-                { link: "/dashboard", text: "Beranda", icon: "home" },
+                { link: "/dashboard", text: "Dashboard", icon: "home" },
             ]}
         >
             <Head title="Beranda" />
