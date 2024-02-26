@@ -1,7 +1,6 @@
-import Buttons from "@/Components/Buttons";
+import { MyButton } from "@/Components/buttons";
 import AmLayout from "@/Layouts/AmLayout";
-import AmReportCard from "@/Components/AmReportCard";
-import AmCalender from "@/Components/AmCalender";
+import { AmReportCard, AmCalender } from "@/Components/";
 import { Head } from "@inertiajs/react";
 
 import { DocumentPlusIcon } from "@heroicons/react/24/outline";
@@ -28,9 +27,9 @@ export default function AmDashboard({ auth, semua_laporan }) {
                         Sul-Sel.
                     </p>
                 </div>
-                <Buttons className="ml-4" name="Laporan Baru" >
+                <MyButton className="ml-4" name="Laporan Baru" >
                     <DocumentPlusIcon className="w-5 h-5" />
-                </Buttons>
+                </MyButton>
             </div>
 
             <div className="h-1 w-full bg-disable mb-4"></div>

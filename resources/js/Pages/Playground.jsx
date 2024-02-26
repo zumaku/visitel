@@ -1,4 +1,4 @@
-import Buttons from "@/Components/Buttons";
+import { MyButton } from "@/Components/buttons";
 import AmLayout from "@/Layouts/AmLayout";
 import { ArrowRightIcon, DocumentPlusIcon, EllipsisHorizontalCircleIcon, FunnelIcon } from "@heroicons/react/24/outline";
 
@@ -21,12 +21,12 @@ export default function Playground({auth}) {
             <div className="h-1 w-full bg-disable mb-4"></div>
             <div className="flex">
                 <div className="flex">
-                    <Buttons name="Laporan Baru" type="primary" >
+                    <MyButton name="Laporan Baru" type="primary" >
                         <DocumentPlusIcon className="w-5 h-5" />
-                    </Buttons>
-                    <Buttons className="ml-4" name="Filter" type="secondary" >
+                    </MyButton>
+                    <MyButton className="ml-4" name="Filter" type="secondary" >
                         <FunnelIcon className="w-5 h-5" />
-                    </Buttons>
+                    </MyButton>
                 </div>
             </div>
         </AmLayout>

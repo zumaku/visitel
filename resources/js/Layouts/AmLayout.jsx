@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { MarkLogo, SecondaryLogo } from '@/Components/logos';
 import { HomeIcon, DocumentDuplicateIcon, BuildingOfficeIcon, ArrowLeftStartOnRectangleIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { SideMenuButton } from '@/Components/buttons';
-import SideOpen from '@/Components/icons/SideOpen';
-import Breadcrumb from '@/Components/Breadcrumb';
+import { SideOpen } from '@/Components/icons';
+import { Breadcrumb } from '@/Components';
 import { Link } from '@inertiajs/react';
 
 export default function AmLayout({user, breadcrumbItem, children, active}) {
