@@ -16,7 +16,7 @@ export default function AmLayout({user, breadcrumbItem, children, active}) {
     };
 
     return (
-        <div className='flex w-full h-screen overflow-hidden'>
+        <div className='flex w-full h-screen overflow-hidden selection:bg-primary-300'>
             <aside className={`${
                 isOpen ? 'w-64' : 'w-20'
             } px-2 bg-tertiary-800 text-white  py-8 flex flex-col justify-between items-start transition-all relative`}>

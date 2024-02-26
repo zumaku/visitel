@@ -40,4 +40,8 @@ class AmDashboardController extends Controller
             'semua_laporan' => $laporan_dengan_nama,
         ]);
     }
+
+    public function laporan() {
+        return Inertia::render('AmLaporan');
+    }
 }

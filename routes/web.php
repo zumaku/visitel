@@ -44,6 +44,7 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
     
 Route::get('/dashboard', [AmDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/laporan', [AmDashboardController::class, 'laporan'])->middleware(['auth', 'verified'])->name('laporan');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
