@@ -4,8 +4,8 @@ import { AmReportCard, AmCalender } from "@/Components/";
 import { Head } from "@inertiajs/react";
 
 import { DocumentPlusIcon } from "@heroicons/react/24/outline";
-export default function AmDashboard({ auth, semua_laporan }) {
-    const laporan_terbaru = semua_laporan.slice(0, 3);
+export default function AmDashboard({ auth, laporan_terbaru, semua_laporan }) {
+    // console.log(semua_laporan);
 
     return (
         <AmLayout
@@ -42,6 +42,7 @@ export default function AmDashboard({ auth, semua_laporan }) {
                         key={index}
                         link={laporan.slug}
                         title={`${laporan.name} - ${laporan.visitel_client.name}`}
+                        // title={`${laporan.name}`}
                         activity={laporan.activity}
                         date={laporan.date}
                     />
