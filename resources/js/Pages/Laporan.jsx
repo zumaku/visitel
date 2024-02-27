@@ -17,7 +17,7 @@ import {
 import { Link } from "@inertiajs/react";
 import { useEffect } from "react";
 
-export default function Laporan({ auth, slug, laporan }) {
+export default function Laporan({ auth, laporan }) {
     const pemisahKoma = (obj) => {
         return obj.split(", ");
     };
