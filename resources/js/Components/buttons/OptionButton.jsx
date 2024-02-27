@@ -1,7 +1,7 @@
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-export default function Playground({ deleteOption, downloadTableOption, downloadDokumenOption, editLaporanOption }) {
+export default function OptionButton({ deleteLaporanOption, downloadTableOption, downloadDokumenOption, editLaporanOption }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -61,7 +61,7 @@ export default function Playground({ deleteOption, downloadTableOption, download
                     </li>
                     )}
                 </ul>
-                {deleteOption && (
+                {deleteLaporanOption && (
                     <div className="py-2 bg-primary hover:bg-primary-500 active:bg-primary-600 group">
                     <a
                         href="#"

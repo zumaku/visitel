@@ -1,4 +1,5 @@
 import { Attribute } from "@/Components";
+import OptionButton from "@/Components/buttons/OptionButton";
 import { RupiahIcon } from "@/Components/icons";
 import { AmLayout } from "@/Layouts";
 import {
@@ -34,9 +35,7 @@ export default function Laporan({ auth, slug, laporan }) {
         >
             <div className="w-full flex justify-between items-start">
                 <h1 className={`text-h1 mb-4`}>{laporan.name}</h1>
-                <button>
-                    <EllipsisVerticalIcon className="w-10 h-10" />
-                </button>
+                <OptionButton downloadDokumenOption={true} editLaporanOption={true} deleteLaporanOption={true} />
             </div>
 
             {/* Attributes */}
