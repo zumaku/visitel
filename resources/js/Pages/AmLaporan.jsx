@@ -21,7 +21,6 @@ import {
 import { Link } from "@inertiajs/react";
 
 export default function AmLaporan({ auth, semua_laporan }) {
-    console.log(semua_laporan);
 
     return (
         <AmLayout

@@ -12,7 +12,7 @@ use function Termwind\render;
 
 class AmDashboardController extends Controller
 {
-    private function getReportData(){
+    private function getAllReportData(){
         $user = Auth::user();
         return VisitelReport::with('visitel_client')
                 ->where('visitel_users_id', $user->id)
@@ -20,7 +20,7 @@ class AmDashboardController extends Controller
                 ->get(['id', 'visitel_clients_id', 'name', 'slug', 'status', 'date', 'ups_or_sus', 'amount', 'activity']);
     }
 
-    private function getLimitData($limit){
+    private function getLimitReportData($limit){
         $user = Auth::user();
         return VisitelReport::with('visitel_client')
                 ->where('visitel_users_id', $user->id)
@@ -28,18 +28,35 @@ class AmDashboardController extends Controller
                 ->orderBy('date', 'desc')
                 ->get(['id', 'visitel_clients_id', 'name', 'slug', 'status', 'date', 'ups_or_sus', 'amount', 'activity']);
     }
+
+    private function getReportData($slug){
+        $user = Auth::user();
+        return VisitelReport::with('visitel_client')
+                            ->where('visitel_users_id', $user->id)
+                            ->where('slug', $slug)
+                            ->first();
+    }
+
+
+    // ================ Pages Method ================
     
     public function index() {
-        // dd($this->getReportData());
+        // dd($this->getAllReportData());
         return Inertia::render('AmDashboard', [
-            'laporan_terbaru' => $this->getLimitData(3),
-            'semua_laporan' => $this->getReportData(),
+            'laporan_terbaru' => $this->getLimitReportData(3),
+            'semua_laporan' => $this->getAllReportData(),
         ]);
     }
 
     public function laporan() {
         return Inertia::render('AmLaporan', [
-            'semua_laporan' => $this->getReportData(),
+            'semua_laporan' => $this->getAllReportData(),
+        ]);
+    }
+
+    public function readLaporan($slug) {
+        return Inertia::render('Laporan', [
+            'laporan' => $this->getReportData($slug),
         ]);
     }
 }
