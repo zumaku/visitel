@@ -15,33 +15,21 @@ class AmDashboardController extends Controller
     
     public function index() {
         $user_id = Auth::id();
-        $laporan_terbaru = VisitelReport::where('visitel_users_id', $user_id)
+        $laporan_terbaru = VisitelReport::with('visitel_client')
+                            ->where('visitel_users_id', $user_id)
                             ->orderBy('date', 'desc')
-                            // ->limit(3)
-                            ->get(['visitel_clients_id', 'name', 'slug', 'status', 'date', 'activity']);
-
-        $laporan_dengan_nama = [];
-        foreach ($laporan_terbaru as $laporan) {
-            $clientName = VisitelClient::where('id', $laporan->visitel_clients_id)->value('name');
-            $laporan_dengan_nama[] = [
-                'date' => $laporan->date,
-                'name' => $laporan->name,
-                'slug' => $laporan->slug,
-                'status' => $laporan->status,
-                'activity' => $laporan->activity,
-                // 'client_id' => $laporan->visitel_clients_id,
-                'client_name' => $clientName,
-            ];
-        }
-
-
+                            ->get(['id', 'name', 'slug', 'status', 'date', 'activity']);
 
         return Inertia::render('AmDashboard', [
-            'semua_laporan' => $laporan_dengan_nama,
+            'semua_laporan' => $laporan_terbaru,
         ]);
     }
 
     public function laporan() {
+        $user_id = Auth::id();
+        $laporan = VisitelReport::where('visitel_users_id', $user_id)
+                    ->orderBy('date', 'desc')
+                    ->get(['visitel_clients_id', 'name', 'slug', 'date', 'status', 'amount', 'activity']);
         return Inertia::render('AmLaporan');
     }
 }

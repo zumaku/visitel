@@ -41,7 +41,7 @@ export default function AmDashboard({ auth, semua_laporan }) {
                     <AmReportCard
                         key={index}
                         link={laporan.slug}
-                        title={`${laporan.name} - ${laporan.client_name}`}
+                        title={`${laporan.name} - ${laporan.visitel_client.name}`}
                         activity={laporan.activity}
                         date={laporan.date}
                     />
