@@ -92,8 +92,8 @@ class VisitelReportFactory extends Factory
      */
     public function definition(): array
     {
-        $random_user_id = rand(1,env('JML_USER'));
-        $random_client_id = rand(1,env('JML_CLIENT'));
+        $random_user_id = rand(1, env('JML_USER'));
+        $random_client_id = rand(1, env('JML_CLIENT'));
         
         $status = "";
         switch (rand(1,3)){
@@ -114,7 +114,7 @@ class VisitelReportFactory extends Factory
         if(rand(0,1) == 1) $ups_or_sus = "Upscale";
         else $ups_or_sus = "Sustain";
 
-        $random_amount = rand(20, 400) + "000000";
+        $random_amount = rand(20, 400) . "000000";
 
         $activity = "";
         switch (rand(1,3)){

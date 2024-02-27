@@ -16,7 +16,7 @@ class VisitelReport extends Model
 
     public function visitel_client()
     {
-        return $this->belongsTo(VisitelClient::class, 'id');
+        return $this->belongsTo(VisitelClient::class, 'visitel_clients_id'); // Nama kolom fk di tabel report
     }
 }
 

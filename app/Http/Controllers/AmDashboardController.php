@@ -12,24 +12,34 @@ use function Termwind\render;
 
 class AmDashboardController extends Controller
 {
+    private function getReportData(){
+        $user = Auth::user();
+        return VisitelReport::with('visitel_client')
+                ->where('visitel_users_id', $user->id)
+                ->orderBy('date', 'desc')
+                ->get(['id', 'visitel_clients_id', 'name', 'slug', 'status', 'date', 'ups_or_sus', 'amount', 'activity']);
+    }
+
+    private function getLimitData($limit){
+        $user = Auth::user();
+        return VisitelReport::with('visitel_client')
+                ->where('visitel_users_id', $user->id)
+                ->limit($limit)
+                ->orderBy('date', 'desc')
+                ->get(['id', 'visitel_clients_id', 'name', 'slug', 'status', 'date', 'ups_or_sus', 'amount', 'activity']);
+    }
     
     public function index() {
-        $user_id = Auth::id();
-        $laporan_terbaru = VisitelReport::with('visitel_client')
-                            ->where('visitel_users_id', $user_id)
-                            ->orderBy('date', 'desc')
-                            ->get(['id', 'name', 'slug', 'status', 'date', 'activity']);
-
+        // dd($this->getReportData());
         return Inertia::render('AmDashboard', [
-            'semua_laporan' => $laporan_terbaru,
+            'laporan_terbaru' => $this->getLimitData(3),
+            'semua_laporan' => $this->getReportData(),
         ]);
     }
 
     public function laporan() {
-        $user_id = Auth::id();
-        $laporan = VisitelReport::where('visitel_users_id', $user_id)
-                    ->orderBy('date', 'desc')
-                    ->get(['visitel_clients_id', 'name', 'slug', 'date', 'status', 'amount', 'activity']);
-        return Inertia::render('AmLaporan');
+        return Inertia::render('AmLaporan', [
+            'semua_laporan' => $this->getReportData(),
+        ]);
     }
 }
