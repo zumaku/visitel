@@ -52,6 +52,7 @@ export default function AmLaporan({ auth, semua_laporan }) {
             {/* Tables */}
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-12">
                 <table class="w-full text-sm text-left rtl:text-right text-tertiary">
+                    {/* Header */}
                     <thead class="text-xs text-tertiary uppercase bg-white  ">
                         <tr>
                             <th scope="col" class="px-6 py-3 flex">
@@ -102,6 +103,8 @@ export default function AmLaporan({ auth, semua_laporan }) {
                             </th>
                         </tr>
                     </thead>
+
+                    {/* Body */}
                     <tbody>
                         {semua_laporan.map((laporan, index) => (
                             <tr key={index} class="bg-white hover:bg-secondary-100 border-b">
@@ -109,10 +112,10 @@ export default function AmLaporan({ auth, semua_laporan }) {
                                     scope="row"
                                     class="px-6 py-4 font-body-sm text-tertiary whitespace-nowrap"
                                 >
-                                    <Link href={`/laporan/${laporan.slug}`}>{laporan.name}</Link>
+                                    <Link href={`/laporan/${laporan.slug}`} className="hover:text-primary">{laporan.name}</Link>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <Link href={`/client/${laporan.visitel_client.slug}`}>{laporan.visitel_client.name}</Link>
+                                    <Link href={`/client/${laporan.visitel_client.slug}`} className="hover:text-primary">{laporan.visitel_client.name}</Link>
                                 </td>
                                 <td class="px-6 py-4">15 January 2023</td>
                                 <td class="px-6 py-4">
