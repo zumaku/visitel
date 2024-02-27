@@ -59,7 +59,7 @@ export default function AmLayout({user, breadcrumbItem, children, active}) {
             </aside>
             <section className='w-full h-screen'>
                 {/* Navbar */}
-                <nav className={`px-2 py-2 w-full h-fit bg-tertiary-100 flex justify-start items-center fixed top-0`}>
+                <nav className={`px-2 py-2 w-full h-fit bg-tertiary-100 flex justify-start items-center fixed top-0 z-40`}>
                     <div className="flex w-12 justify-between mr-5">
                         <Link href="">
                             <ChevronLeftIcon className='w-5 h-5 text-tertiary' />
