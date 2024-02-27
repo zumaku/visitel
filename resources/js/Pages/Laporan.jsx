@@ -14,8 +14,14 @@ import {
     CheckCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "@inertiajs/react";
+import { useEffect } from "react";
 
 export default function Laporan({ auth, slug, laporan }) {
+    const pemisahKoma = (obj) => {
+        return obj.split(", ");
+    };
+
+    useEffect(() => {}, []);
 
     return (
         <AmLayout
@@ -130,6 +136,32 @@ export default function Laporan({ auth, slug, laporan }) {
             </table>
 
             <div className="h-1 w-full bg-disable my-6"></div>
+
+            {/* Content */}
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-8 w-full my-10">
+                <div class="col-span-4">
+                    <h3 className="text-h3">Laporan</h3>
+                    <div dangerouslySetInnerHTML={{ __html: laporan.content }} />
+                </div>
+                <div class="col-span-2">
+                    <h3 className="text-h3 mb-3">Layanan Potensial</h3>
+                    <div className="flex flex-wrap mb-10">
+                        {pemisahKoma(laporan.potential_product).map((service, index) => (
+                            <div className="border w-fit border-tertiary flex-center px-4 py-1 mr-2 rounded-full">
+                                <p key={index} className="text-body">{service}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <h3 className="text-h3 mb-3">Info Kompetitor</h3>
+                    <div className="flex flex-wrap mb-10">
+                        {pemisahKoma(laporan.info_competitor).map((service, index) => (
+                            <div className="border w-fit border-tertiary flex-center px-4 py-1 mr-2 rounded-full">
+                                <p key={index} className="text-body">{service}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </AmLayout>
     );
 }
