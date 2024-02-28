@@ -36,32 +36,28 @@ export default function LaporanBaru({ auth, clients }) {
     }
 
     // Calon Data Baru
-    const [title, setTitle] = useState();                           // Judul Baru
-    const [clientId, setClientId] = useState(null);                 // Id Client
+    const [title, setTitle] = useState('');                           
+    const [slug, setSlug] = useState('');                           
+    const [clientId, setClientId] = useState(null);                 
     const [selectedClient, setSelectedClient] = useState(null);
-    const [date, setDate] = useState(getTodayDate());               // Tanggal Baru
-    const [activity, setActivity] = useState()                      // Kegiatan Baru
-    const [upsOrSus, setUpsOrSus] = useState("Upscale")             // Upscale atau Sustain Baru
-    const [amount, setAmount] = useState()                          // Perkiraan Jumlah Baru
-    const [progres, setProgres] = useState()                        // Proggress Baru
-    const [editorHtml, setEditorHtml] = useState('')                // Isi Konten Baru
+    const [date, setDate] = useState(getTodayDate());               
+    const [activity, setActivity] = useState()                      
+    const [upsOrSus, setUpsOrSus] = useState("Upscale")              
+    const [amount, setAmount] = useState()
+    const [progres, setProgres] = useState()                        
+    const [editorHtml, setEditorHtml] = useState('')
     const [tempImg, setTempImg] = useState([])
-    const [tagsLayanan, setTagsLayanan] = useState('')              // Potensial Layanan Baru
-    const [tagsKompetitor, setTagsKompetitor] = useState('')        // Info Kompetitor Baru
+    const [tagsLayanan, setTagsLayanan] = useState('')
+    const [tagsKompetitor, setTagsKompetitor] = useState('')
 
 
-    // useeffect hook ini akan dijalankan jika terjadi perubahan pada state editorHtml
     useEffect(() => {
-        // Fungsi untuk menghapus image yang terupload ke storage server
         const deleteImageFromServer = async (imageName) => {
-            // Jika di dalam state editorHtml terdapat nama image ini
             if(!editorHtml.includes(imageName)){
                 try {
-                    // Kirim perintah untuk menghapus image tersebut
                     const response = await axios.post('/delete-image', {
                         imageName: imageName
                     });
-                    // Hapus pula nama image dari state array tempImg
                     setTempImg(prevTempImg => prevTempImg.filter(name => name !== imageName))
                     return response.data;
                 } catch (error) {
@@ -71,21 +67,44 @@ export default function LaporanBaru({ auth, clients }) {
             }
         };
 
-        // Selama tempImg tidak kosong
         if (tempImg.length > 0) {
-            // untuk setiap nama image ditempImg
             tempImg.forEach((imageName) => {
-                // Jalankan fungsi berikut
                 deleteImageFromServer(imageName);
             });
         }
     }, [editorHtml]);
 
+    const slugify = (text) => {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')           
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-')
+            .replace(/^-+/, '')             
+            .replace(/-+$/, '');            
+    }
 
-    useEffect(() => {
-        console.log(tempImg);
-        console.log(editorHtml);
-    }, [tempImg, editorHtml])
+    const handleTitleChange = e => {
+        setTitle(e.target.value)
+        setSlug(slugify(e.target.value))
+    }
+
+    const sendNewReport = async (postData) => {
+        try {
+            const response = await axios.post('/upload-laporan-baru', postData);
+            console.log('Response from server:', response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Failed to create post:', error);
+            throw error;
+        }
+    };
+
+    const handleSubmit = () => {
+        response = sendNewReport({
+            name: title,
+            // slug: 
+        })
+    }
     
 
     return (
@@ -104,7 +123,7 @@ export default function LaporanBaru({ auth, clients }) {
                 <input
                     type="text"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={handleTitleChange}
                     className="text-h1 mb-4 placeholder:text-disable border-0 outline-none focus:ring-0"
                     placeholder="Judul Laporan"
                 />
