@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import "quill/dist/quill.snow.css";
+// import "quill/dist/quill.snow.css
+import 'react-quill/dist/quill.snow.css';
 import Quill from "quill";
 import Toolbar from "quill/modules/toolbar";
 import Snow from "quill/themes/snow";
