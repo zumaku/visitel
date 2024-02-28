@@ -48,6 +48,26 @@ Route::get('/laporan', [AmDashboardController::class, 'laporan'])->middleware(['
 Route::get('/laporan/{slug}', [AmDashboardController::class, 'readLaporan'])->middleware(['auth', 'verified'])->name('read_laporan');
 Route::get('/laporan-baru/', [AmDashboardController::class, 'addLaporan'])->middleware(['auth', 'verified'])->name('add_laporan');
 
+use Illuminate\Http\Request;
+
+
+// Upload image editor
+Route::post('/upload-image', function (Request $request) {
+    // Validasi request
+    $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // Simpan gambar ke dalam folder public/img
+    $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+    $request->file('image')->storeAs('public/img', $imageName);
+
+    // Kembalikan URL gambar
+    $imageUrl = asset('storage/img/' . $imageName);
+    return response()->json(['imageUrl' => $imageUrl]);
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
