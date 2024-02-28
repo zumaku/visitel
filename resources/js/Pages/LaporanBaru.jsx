@@ -178,7 +178,7 @@ export default function LaporanBaru({ auth, clients }) {
                         </Attribute>
                     </td>
                     <td>
-                        <select value={activity} onChange={(e) => setActivity(e.target.value)} className="py-1 px-2 rounded-md border-2 border-disable hover:border-tertiary-100 w-full" >
+                        <select value={progres} onChange={(e) => setProgres(e.target.value)} className="py-1 px-2 rounded-md border-2 border-disable hover:border-tertiary-100 w-full" >
                             <option value="Terencana">Terencana</option>
                             <option value="Proses">Proses</option>
                             <option value="Selesai">Selesai</option>
