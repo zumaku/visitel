@@ -4,6 +4,7 @@ import Attribute from "./Attribute";
 import Breadcrumb from "./Breadcrumb";
 import AmTable from "./AmTable";
 import ChooseClient from "./ChooseClient";
+import EditorText from "./EditorText";
 
 export {
     AmCalender, 
@@ -11,5 +12,6 @@ export {
     Attribute,
     Breadcrumb,
     AmTable,
-    ChooseClient
+    ChooseClient,
+    EditorText
 }

@@ -1,4 +1,4 @@
-import { Attribute, ChooseClient } from "@/Components";
+import { Attribute, ChooseClient, EditorText } from "@/Components";
 import { MyButton, OptionButton } from "@/Components/buttons";
 import { RupiahIcon } from "@/Components/icons";
 import { AmLayout } from "@/Layouts";
@@ -12,7 +12,7 @@ import {
     PauseCircleIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LaporanBaru({ auth, clients }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +42,7 @@ export default function LaporanBaru({ auth, clients }) {
     const [upsOrSus, setUpsOrSus] = useState("Upscale")
     const [amount, setAmount] = useState()
     const [progres, setProgres] = useState()
+    const [editorHtml, setEditorHtml] = useState('')
 
     return (
         <AmLayout
@@ -190,8 +191,10 @@ export default function LaporanBaru({ auth, clients }) {
             <div className="h-1 w-full bg-disable my-6"></div>
 
             {/* Content */}
-            <div class="grid grid-cols-1 md:grid-cols-6 gap-8 w-full my-10">
-                <div class="col-span-4"></div>
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-8 w-full mt-10 mb-96">
+                <div class="col-span-4">
+                    <EditorText setEditorHtml={setEditorHtml} />
+                </div>
                 <div class="col-span-2"></div>
             </div>
         </AmLayout>
