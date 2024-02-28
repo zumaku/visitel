@@ -1,7 +1,5 @@
-import { Attribute } from "@/Components";
-import ChooseClient from "@/Components/ChooseClient";
-import { MyButton } from "@/Components/buttons";
-import OptionButton from "@/Components/buttons/OptionButton";
+import { Attribute, ChooseClient } from "@/Components";
+import { MyButton, OptionButton } from "@/Components/buttons";
 import { RupiahIcon } from "@/Components/icons";
 import { AmLayout } from "@/Layouts";
 import {

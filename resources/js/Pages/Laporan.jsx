@@ -1,5 +1,5 @@
 import { Attribute } from "@/Components";
-import OptionButton from "@/Components/buttons/OptionButton";
+import { OptionButton } from "@/Components/buttons";
 import { RupiahIcon } from "@/Components/icons";
 import { AmLayout } from "@/Layouts";
 import {
