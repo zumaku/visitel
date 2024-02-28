@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AmDashboardController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProviderController;
 use Illuminate\Foundation\Application;
@@ -47,8 +48,9 @@ Route::get('/dashboard', [AmDashboardController::class, 'index'])->middleware(['
 Route::get('/laporan', [AmDashboardController::class, 'laporan'])->middleware(['auth', 'verified'])->name('laporan');
 Route::get('/laporan/{slug}', [AmDashboardController::class, 'readLaporan'])->middleware(['auth', 'verified'])->name('read_laporan');
 Route::get('/laporan-baru', [AmDashboardController::class, 'addLaporan'])->middleware(['auth', 'verified'])->name('add_laporan');
-Route::post('/upload-image', [AmDashboardController::class, 'uploadImage'])->middleware(['auth', 'verified'])->name('upload_image');
-Route::post('/delete-image', [AmDashboardController::class, 'deleteImage'])->middleware(['auth', 'verified'])->name('delete_image');
+
+Route::post('/upload-image', [LaporanController::class, 'storeImage'])->middleware(['auth', 'verified'])->name('upload_image');
+Route::post('/delete-image', [LaporanController::class, 'destroyImage'])->middleware(['auth', 'verified'])->name('delete_image');
 
 
 Route::middleware('auth')->group(function () {

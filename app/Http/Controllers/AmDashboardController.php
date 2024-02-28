@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\VisitelClient;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\VisitelReport;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 use function Termwind\render;
 
@@ -70,39 +68,5 @@ class AmDashboardController extends Controller
         return Inertia::render('LaporanBaru', [
             'clients' => $this->getClientData(),
         ]);
-    }
-
-    public function uploadImage(Request $request) {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        
-        $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
-        $request->file('image')->storeAs('public/img', $imageName);
-        $imageUrl = asset('storage/img/' . $imageName);
-        return response()->json([
-            'imageUrl' => $imageUrl,
-            'imageName' => $imageName
-        ]);
-    }
-
-    public function deleteImage(Request $request) {
-        $request->validate([
-            'imageName' => 'required|string',
-        ]);
-
-        $imageName = $request->imageName;
-
-        try {
-            Storage::delete('public/img/' . $imageName);
-
-            return response()->json([
-                'message' => 'Gambar berhasil dihapus',
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Gagal menghapus gambar: ' . $e->getMessage(),
-            ], 500);
-        }
     }
 }
