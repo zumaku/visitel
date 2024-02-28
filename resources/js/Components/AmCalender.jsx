@@ -124,8 +124,8 @@ export default function AmCalender({data, className = '', ...props}) {
                 </div>
             </div>
             <div className="grid grid-cols-7 gap-1">
-                {namaHari.map((item) => (
-                    <div className="h-full w-full flex items-center justify-center text-center text-body">
+                {namaHari.map((item, index) => (
+                    <div key={index} className="h-full w-full flex items-center justify-center text-center text-body">
                         {item}
                     </div>
                 ))}

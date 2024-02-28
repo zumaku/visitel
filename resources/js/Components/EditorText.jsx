@@ -14,7 +14,7 @@ Quill.register({
     "formats/image": Image,
 });
 
-const EditorText = ({ setEditorHtml, setTempImg }) => {
+const EditorText = ({ setEditorHtml, tempImg, setTempImg }) => {
     const quillRef = useRef(null);
 
     useEffect(() => {
@@ -59,6 +59,14 @@ const EditorText = ({ setEditorHtml, setTempImg }) => {
 
                         // Mendapatkan URL gambar dari backend
                         const imageUrl = response.data.imageUrl;
+                        setTempImg(prevTempImg => {
+                            if (prevTempImg.length === 0) {
+                                return [response.data.imageName];
+                            } else {
+                                return [...prevTempImg, response.data.imageName];
+                            }
+                        });
+                        
 
                         // Sisipkan gambar ke dalam editor menggunakan URL gambar yang sudah diunggah
                         const range = quill.getSelection(true);

@@ -11,8 +11,10 @@ import {
     FireIcon,
     PauseCircleIcon,
     XMarkIcon,
+    DocumentArrowUpIcon,
+    TrashIcon,
 } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LaporanBaru({ auth, clients }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -43,9 +45,48 @@ export default function LaporanBaru({ auth, clients }) {
     const [amount, setAmount] = useState()                          // Perkiraan Jumlah Baru
     const [progres, setProgres] = useState()                        // Proggress Baru
     const [editorHtml, setEditorHtml] = useState('')                // Isi Konten Baru
-    const [temImg, setTempImg] = useState('')
+    const [tempImg, setTempImg] = useState([])
     const [tagsLayanan, setTagsLayanan] = useState('')              // Potensial Layanan Baru
     const [tagsKompetitor, setTagsKompetitor] = useState('')        // Info Kompetitor Baru
+
+
+    // useeffect hook ini akan dijalankan jika terjadi perubahan pada state editorHtml
+    useEffect(() => {
+        // Fungsi untuk menghapus image yang terupload ke storage server
+        const deleteImageFromServer = async (imageName) => {
+            // Jika di dalam state editorHtml terdapat nama image ini
+            if(!editorHtml.includes(imageName)){
+                try {
+                    // Kirim perintah untuk menghapus image tersebut
+                    const response = await axios.post('/delete-image', {
+                        imageName: imageName
+                    });
+                    // Hapus pula nama image dari state array tempImg
+                    setTempImg(prevTempImg => prevTempImg.filter(name => name !== imageName))
+                    return response.data;
+                } catch (error) {
+                    console.error('Failed to delete image:', error);
+                    throw error;
+                }
+            }
+        };
+
+        // Selama tempImg tidak kosong
+        if (tempImg.length > 0) {
+            // untuk setiap nama image ditempImg
+            tempImg.forEach((imageName) => {
+                // Jalankan fungsi berikut
+                deleteImageFromServer(imageName);
+            });
+        }
+    }, [editorHtml]);
+
+
+    useEffect(() => {
+        console.log(tempImg);
+        console.log(editorHtml);
+    }, [tempImg, editorHtml])
+    
 
     return (
         <AmLayout
@@ -194,10 +235,10 @@ export default function LaporanBaru({ auth, clients }) {
             <div className="h-1 w-full bg-disable my-6"></div>
 
             {/* Content */}
-            <div class="grid grid-cols-1 md:grid-cols-6 gap-8 w-full mt-10 mb-96">
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-8 w-full my-10">
                 <div class="col-span-4 min-h-12">
                     <h2 className="text-h2">Laporan</h2>
-                    <EditorText setEditorHtml={setEditorHtml} />
+                    <EditorText setEditorHtml={setEditorHtml} tempImg={tempImg} setTempImg={setTempImg} />
                 </div>
                 <div class="col-span-2">
                     <h2 className="text-h2">Layanan Potensial</h2>
@@ -205,6 +246,16 @@ export default function LaporanBaru({ auth, clients }) {
                     <h2 className="text-h2 mt-5">Info Kompetitor</h2>
                     <EditorTags setTagsString={setTagsKompetitor} placeholder='Tag Kompetitor (Pisah dengan koma ",")' />
                 </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="mt-36 mb-20 flex">
+                <MyButton name="Simpan" className="mr-4">
+                    <DocumentArrowUpIcon className="w-5 text-white" stroke-width="2" />
+                </MyButton>
+                <MyButton onClick={() => window.history.back()} name="Batal" type="secondary">
+                    <TrashIcon className="w-5 text-tertiary" stroke-width="2" />
+                </MyButton>
             </div>
         </AmLayout>
     );

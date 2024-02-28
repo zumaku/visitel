@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\VisitelReport;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use function Termwind\render;
 
@@ -78,8 +79,30 @@ class AmDashboardController extends Controller
         
         $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
         $request->file('image')->storeAs('public/img', $imageName);
-
         $imageUrl = asset('storage/img/' . $imageName);
-        return response()->json(['imageUrl' => $imageUrl]);
+        return response()->json([
+            'imageUrl' => $imageUrl,
+            'imageName' => $imageName
+        ]);
+    }
+
+    public function deleteImage(Request $request) {
+        $request->validate([
+            'imageName' => 'required|string',
+        ]);
+
+        $imageName = $request->imageName;
+
+        try {
+            Storage::delete('public/img/' . $imageName);
+
+            return response()->json([
+                'message' => 'Gambar berhasil dihapus',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Gagal menghapus gambar: ' . $e->getMessage(),
+            ], 500);
+        }
     }
 }
