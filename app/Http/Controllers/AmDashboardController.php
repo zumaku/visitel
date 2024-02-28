@@ -13,6 +13,8 @@ use function Termwind\render;
 
 class AmDashboardController extends Controller
 {
+    // ================ Get Data Method ================
+
     private function getAllReportData(){
         $user = Auth::user();
         return VisitelReport::with('visitel_client')
@@ -44,33 +46,7 @@ class AmDashboardController extends Controller
     }
 
 
-    // ================ Pages Method ================
-    
-    public function index() {
-        // dd($this->getAllReportData());
-        return Inertia::render('AmDashboard', [
-            'laporan_terbaru' => $this->getLimitReportData(3),
-            'semua_laporan' => $this->getAllReportData(),
-        ]);
-    }
-
-    public function laporan() {
-        return Inertia::render('AmLaporan', [
-            'semua_laporan' => $this->getAllReportData(),
-        ]);
-    }
-
-    public function readLaporan($slug) {
-        return Inertia::render('Laporan', [
-            'laporan' => $this->getReportData($slug),
-        ]);
-    }
-
-    public function addLaporan() {
-        return Inertia::render('LaporanBaru', [
-            'clients' => $this->getClientData(),
-        ]);
-    }
+    // ================ Create Data Method ================
 
     public function storeImage(Request $request) {
         $request->validate([
@@ -103,5 +79,39 @@ class AmDashboardController extends Controller
                 'error' => 'Gagal menghapus gambar: ' . $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function createLaporanBaru(Request $request){
+        // Isikan nanti
+        return response()->json(['message' => "Success"]);
+    }
+
+
+    // ================ Pages Method ================
+    
+    public function index() {
+        // dd($this->getAllReportData());
+        return Inertia::render('AmDashboard', [
+            'laporan_terbaru' => $this->getLimitReportData(3),
+            'semua_laporan' => $this->getAllReportData(),
+        ]);
+    }
+
+    public function laporan() {
+        return Inertia::render('AmLaporan', [
+            'semua_laporan' => $this->getAllReportData(),
+        ]);
+    }
+
+    public function readLaporan($slug) {
+        return Inertia::render('Laporan', [
+            'laporan' => $this->getReportData($slug),
+        ]);
+    }
+
+    public function addLaporan() {
+        return Inertia::render('LaporanBaru', [
+            'clients' => $this->getClientData(),
+        ]);
     }
 }
