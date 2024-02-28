@@ -5,7 +5,7 @@ export default function SearchForm({ keySearch, handleChange, placeholder }) {
         <div className="p-3 rounded-lg border-2 border-tertiary hover:border-primary text-tertiary text-body flex justify-between">
             <input
                 type="text"
-                className="w-full border-0 focus:ring-0 p-0"
+                className="w-full border-0 focus:ring-0 focus:border-0 outline-none p-0"
                 placeholder={placeholder}
                 value={keySearch}
                 onChange={handleChange}

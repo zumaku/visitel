@@ -1,4 +1,4 @@
-import { MyButton } from "@/Components/buttons";
+import { MyButtonLink } from "@/Components/buttons";
 import { AmLayout } from "@/Layouts";
 import { AmReportCard, AmCalender } from "@/Components/";
 import { Head } from "@inertiajs/react";
@@ -27,9 +27,9 @@ export default function AmDashboard({ auth, laporan_terbaru, semua_laporan }) {
                         Sul-Sel.
                     </p>
                 </div>
-                <MyButton className="ml-4" name="Laporan Baru" >
+                <MyButtonLink link="/laporan-baru" name="Laporan Baru" type="primary">
                     <DocumentPlusIcon className="w-5 h-5" />
-                </MyButton>
+                </MyButtonLink>
             </div>
 
             <div className="h-1 w-full bg-disable mb-4"></div>

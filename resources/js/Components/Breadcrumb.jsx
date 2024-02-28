@@ -1,10 +1,11 @@
-import { HomeIcon, DocumentDuplicateIcon, BuildingOfficeIcon, DocumentTextIcon, UserGroupIcon, UserIcon } from "@heroicons/react/24/outline" 
+import { HomeIcon, DocumentDuplicateIcon, BuildingOfficeIcon, DocumentTextIcon, UserGroupIcon, UserIcon, DocumentPlusIcon } from "@heroicons/react/24/outline" 
 import { Link } from "@inertiajs/react"
 
 const returnIcon = (icon) => {
     if(icon === "home") return <HomeIcon className='text-primary w-5 h-5' />
     else if (icon === "docs") return <DocumentDuplicateIcon className='text-primary w-5 h-5' />
     else if (icon === "doc") return <DocumentTextIcon className='text-primary w-5 h-5' />
+    else if (icon === "add_doc") return <DocumentPlusIcon className='text-primary w-5 h-5' />
     else if (icon === "building") return <BuildingOfficeIcon className='text-primary w-5 h-5' />
     else if (icon === "users") return <UserGroupIcon className='text-primary w-5 h-5' />
     else if (icon === "user") return <UserIcon className='text-primary w-5 h-5' />

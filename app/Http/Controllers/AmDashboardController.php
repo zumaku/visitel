@@ -37,6 +37,11 @@ class AmDashboardController extends Controller
                             ->first();
     }
 
+    private function getClientData(){
+        $user = Auth::user();
+        return VisitelClient::where('visitel_witel_id', $user->visitel_witels_id)->get();
+    }
+
 
     // ================ Pages Method ================
     
@@ -57,6 +62,14 @@ class AmDashboardController extends Controller
     public function readLaporan($slug) {
         return Inertia::render('Laporan', [
             'laporan' => $this->getReportData($slug),
+        ]);
+    }
+
+    public function addLaporan() {
+
+
+        return Inertia::render('LaporanBaru', [
+            'clients' => $this->getClientData(),
         ]);
     }
 }

@@ -1,13 +1,11 @@
-import AmTable from "@/Components/AmTable";
-import { MyButton } from "@/Components/buttons";
-import OptionButton from "@/Components/buttons/OptionButton";
+import { AmTable } from "@/Components";
+import { MyButton, MyButtonLink, OptionButton } from "@/Components/buttons";
 import { SearchForm } from "@/Components/forms";
 import { AmLayout } from "@/Layouts";
 import {
     DocumentPlusIcon,
     FunnelIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
 export default function AmLaporan({ auth, semua_laporan }) {
@@ -27,17 +25,14 @@ export default function AmLaporan({ auth, semua_laporan }) {
         >
             <div className="w-full flex justify-between items-start">
                 <h1 className={`text-h1 mb-4`}>Laporan</h1>
-                {/* <button>
-                    <EllipsisHorizontalCircleIcon className="w-10 h-10" />
-                </button> */}
                 <OptionButton downloadTableOption={true} />
             </div>
             <div className="h-1 w-full bg-disable mb-4"></div>
             <div className="flex justify-between">
                 <div className="flex">
-                    <MyButton name="Laporan Baru" type="primary">
+                    <MyButtonLink link="/laporan-baru" name="Laporan Baru" type="primary">
                         <DocumentPlusIcon className="w-5 h-5" />
-                    </MyButton>
+                    </MyButtonLink>
                     <MyButton className="ml-4" name="Filter" type="secondary">
                         <FunnelIcon className="w-5 h-5" />
                     </MyButton>

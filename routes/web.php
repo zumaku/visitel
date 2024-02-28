@@ -46,6 +46,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [AmDashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/laporan', [AmDashboardController::class, 'laporan'])->middleware(['auth', 'verified'])->name('laporan');
 Route::get('/laporan/{slug}', [AmDashboardController::class, 'readLaporan'])->middleware(['auth', 'verified'])->name('read_laporan');
+Route::get('/laporan-baru/', [AmDashboardController::class, 'addLaporan'])->middleware(['auth', 'verified'])->name('add_laporan');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
