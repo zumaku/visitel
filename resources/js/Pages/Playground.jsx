@@ -1,39 +1,32 @@
-import { useState } from "react";
-import JoditEditor from "jodit-react";
+import React, { useEffect, useRef } from "react";
+import "quill/dist/quill.snow.css";
+import Quill from "quill/core";
+import Toolbar from "quill/modules/toolbar";
+import Snow from "quill/themes/snow";
+import Bold from "quill/formats/bold";
+import Italic from "quill/formats/italic";
+import Header from "quill/formats/header";
 
-const Editor = ({ placeholder }) => {
-	const [content, setContent] = useState('');
+Quill.register({
+    "modules/toolbar": Toolbar,
+    "themes/snow": Snow,
+    "formats/bold": Bold,
+    "formats/italic": Italic,
+    "formats/header": Header,
+});
 
-	const config = {
-		readonly: false,
-		placeholder: placeholder || 'Start typings...'
-	};
+const Playground = () => {
+    const quillRef = useRef(null);
 
-	const handleBlur = (newContent) => {
-		setContent(newContent);
-	};
+    useEffect(() => {
+        if (quillRef.current) {
+            new Quill(quillRef.current, {
+                theme: "snow",
+            });
+        }
+    }, []);
 
-    const handleKirim = () => {
-        console.log(content);
-    }
-
-	return (
-		<>
-            <JoditEditor
-                value={content}
-                config={config}
-                tabIndex={1} // tabIndex of textarea
-                onBlur={handleBlur} // preferred to use only this option to update the content for performance reasons
-            />
-            <button onClick={handleKirim}>Kirim</button>
-        </>
-	);
+    return <div id="editor" ref={quillRef} />;
 };
 
-export default function Playground() {
-    return (
-        <div className="w-full flex-center p-10">
-            <Editor placeholder={"Editorku"} />
-        </div>
-    )
-}
+export default Playground;
