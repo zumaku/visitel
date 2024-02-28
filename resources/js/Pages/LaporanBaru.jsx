@@ -1,4 +1,4 @@
-import { Attribute, ChooseClient, EditorText } from "@/Components";
+import { Attribute, ChooseClient, EditorTags, EditorText } from "@/Components";
 import { MyButton, OptionButton } from "@/Components/buttons";
 import { RupiahIcon } from "@/Components/icons";
 import { AmLayout } from "@/Layouts";
@@ -12,7 +12,7 @@ import {
     PauseCircleIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function LaporanBaru({ auth, clients }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,15 +34,18 @@ export default function LaporanBaru({ auth, clients }) {
     }
 
     // Calon Data Baru
-    const [title, setTitle] = useState();
-    const [clientId, setClientId] = useState(null);
+    const [title, setTitle] = useState();                           // Judul Baru
+    const [clientId, setClientId] = useState(null);                 // Id Client
     const [selectedClient, setSelectedClient] = useState(null);
-    const [date, setDate] = useState(getTodayDate());
-    const [activity, setActivity] = useState()
-    const [upsOrSus, setUpsOrSus] = useState("Upscale")
-    const [amount, setAmount] = useState()
-    const [progres, setProgres] = useState()
-    const [editorHtml, setEditorHtml] = useState('')
+    const [date, setDate] = useState(getTodayDate());               // Tanggal Baru
+    const [activity, setActivity] = useState()                      // Kegiatan Baru
+    const [upsOrSus, setUpsOrSus] = useState("Upscale")             // Upscale atau Sustain Baru
+    const [amount, setAmount] = useState()                          // Perkiraan Jumlah Baru
+    const [progres, setProgres] = useState()                        // Proggress Baru
+    const [editorHtml, setEditorHtml] = useState('')                // Isi Konten Baru
+    const [temImg, setTempImg] = useState('')
+    const [tagsLayanan, setTagsLayanan] = useState('')              // Potensial Layanan Baru
+    const [tagsKompetitor, setTagsKompetitor] = useState('')        // Info Kompetitor Baru
 
     return (
         <AmLayout
@@ -192,10 +195,16 @@ export default function LaporanBaru({ auth, clients }) {
 
             {/* Content */}
             <div class="grid grid-cols-1 md:grid-cols-6 gap-8 w-full mt-10 mb-96">
-                <div class="col-span-4">
+                <div class="col-span-4 min-h-12">
+                    <h2 className="text-h2">Laporan</h2>
                     <EditorText setEditorHtml={setEditorHtml} />
                 </div>
-                <div class="col-span-2"></div>
+                <div class="col-span-2">
+                    <h2 className="text-h2">Layanan Potensial</h2>
+                    <EditorTags setTagsString={setTagsLayanan} placeholder='Tag Layanan (Pisah dengan koma ",")' />
+                    <h2 className="text-h2 mt-5">Info Kompetitor</h2>
+                    <EditorTags setTagsString={setTagsKompetitor} placeholder='Tag Kompetitor (Pisah dengan koma ",")' />
+                </div>
             </div>
         </AmLayout>
     );

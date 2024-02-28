@@ -14,7 +14,7 @@ Quill.register({
     "formats/image": Image,
 });
 
-const EditorText = ({ setEditorHtml }) => {
+const EditorText = ({ setEditorHtml, setTempImg }) => {
     const quillRef = useRef(null);
 
     useEffect(() => {
