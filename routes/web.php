@@ -50,6 +50,7 @@ Route::get('/laporan/{slug}', [AmDashboardController::class, 'readLaporan'])->mi
 Route::get('/laporan-baru', [AmDashboardController::class, 'addLaporan'])->middleware(['auth', 'verified'])->name('add_laporan');
 Route::get('/laporan-edit/{slug}', [AmDashboardController::class, 'editLaporan'])->middleware(['auth', 'verified'])->name('edit_laporan');
 Route::get('/klien', [AmDashboardController::class, 'klien'])->middleware(['auth', 'verified'])->name('klien');
+Route::get('/klien/{slug}', [AmDashboardController::class, 'readKlien'])->middleware(['auth', 'verified'])->name('read_klien');
 
 Route::post('/upload-image', [AmDashboardController::class, 'storeImage'])->middleware(['auth', 'verified'])->name('upload_image');
 Route::post('/delete-image', [AmDashboardController::class, 'destroyImage'])->middleware(['auth', 'verified'])->name('delete_image');

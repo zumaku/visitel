@@ -1,18 +1,8 @@
 import { Attribute } from "@/Components";
-import { RupiahIcon, SortIcon } from "@/Components/icons";
+import { SortIcon } from "@/Components/icons";
 import {
-    ArrowTrendingDownIcon,
-    ArrowTrendingUpIcon,
     BuildingOfficeIcon,
-    CalendarDaysIcon,
-    ChatBubbleLeftRightIcon,
-    CheckCircleIcon,
-    DocumentIcon,
-    FireIcon,
-    FunnelIcon,
     MapPinIcon,
-    PauseCircleIcon,
-    PlayCircleIcon,
     TagIcon,
     UserIcon,
     UsersIcon,

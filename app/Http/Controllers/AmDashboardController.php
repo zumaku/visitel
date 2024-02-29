@@ -8,6 +8,7 @@ use App\Models\VisitelReport;
 use App\Models\VisitelUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 use function Termwind\render;
@@ -44,6 +45,11 @@ class AmDashboardController extends Controller
     private function getAllClientData(){
         $user = Auth::user();
         return VisitelClient::where('visitel_witels_id', $user->visitel_witels_id)->get();
+    }
+
+    private function getClientData($slug){
+        $user = Auth::user();
+        return VisitelClient::where('visitel_witels_id', $user->visitel_witels_id)->where('slug', $slug)->first();
     }
 
 
@@ -228,4 +234,26 @@ class AmDashboardController extends Controller
         ]);
     }
 
+    public function readKlien($slug) {
+        $client = VisitelClient::with('visitel_reports')->where('slug', $slug)->first();
+
+        if (!$client) {
+            return Redirect::back()->withErrors(['Client tidak ditemukan']);
+        }
+
+        $reports = VisitelReport::where('visitel_clients_id', $client->id)->get();
+
+        $userNames = [];
+        foreach ($reports as $report) {
+            if (!in_array($report->visitel_user->name, $userNames)) {
+                $userNames[] = $report->visitel_user->name;
+            }
+        }
+        $client->usersName = $userNames;
+        // dd($client);
+
+        return Inertia::render('Klien', [
+            'client' => $client,
+        ]);
+    }
 }

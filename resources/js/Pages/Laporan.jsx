@@ -41,8 +41,8 @@ export default function Laporan({ auth, laporan }) {
                 <h1 className={`text-h1 mb-4`}>{laporan.name}</h1>
                 <OptionButton
                     downloadDokumenOption={"#"}
-                    editLaporanOption={"/laporan-edit/" + laporan.slug}
-                    deleteLaporanOption={laporan.id}
+                    editOption={"/laporan-edit/" + laporan.slug}
+                    deleteOption={laporan.id}
                     setIsLoading={setIsLoading}
                     setIsError={setIsError}
                     setIsSuccess={setIsSuccess}

@@ -3,10 +3,10 @@ import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
 export default function OptionButton({
-    deleteLaporanOption = "",
+    deleteOption = "",
     downloadTableOption = "",
     downloadDokumenOption = "",
-    editLaporanOption = "",
+    editOption = "",
     setIsLoading,
     setIsError,
     setIsSuccess
@@ -22,7 +22,7 @@ export default function OptionButton({
             setIsLoading(true);
             try {
                 const response = await axios.post(
-                    "/delete-laporan/" + deleteLaporanOption
+                    "/delete-laporan/" + deleteOption
                 );
                 setIsSuccess(true);
                 setTimeout(() => {
@@ -78,18 +78,18 @@ export default function OptionButton({
                             </Link>
                         </li>
                     )}
-                    {editLaporanOption != "" && (
+                    {editOption != "" && (
                         <li>
                             <Link
-                                href={editLaporanOption}
+                                href={editOption}
                                 className="block px-4 py-2 hover:bg-secondary-100"
                             >
-                                Edit Laporan
+                                Edit Halaman Ini
                             </Link>
                         </li>
                     )}
                 </ul>
-                {deleteLaporanOption != "" && (
+                {deleteOption != "" && (
                     <div
                         onClick={handleDelete}
                         className="py-2 bg-primary cursor-pointer hover:bg-primary-500 active:bg-primary-600 group"
