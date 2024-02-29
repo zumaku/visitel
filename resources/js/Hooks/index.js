@@ -1,5 +1,5 @@
-import useStyledHTML from "./useStyledHTML";
+import useStyledHTMLHook from "./useStyledHTMLHook";
 
 export {
-    useStyledHTML,
+    useStyledHTMLHook,
 }

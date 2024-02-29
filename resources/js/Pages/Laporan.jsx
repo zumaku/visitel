@@ -1,7 +1,7 @@
 import { Attribute } from "@/Components";
 import { OptionButton } from "@/Components/buttons";
 import { RupiahIcon } from "@/Components/icons";
-import { useStyledHTML } from "@/Hooks";
+import { useStyledHTMLHook } from "@/Hooks";
 import { AmLayout } from "@/Layouts";
 import {
     BuildingOfficeIcon,
@@ -19,13 +19,11 @@ import { Link } from "@inertiajs/react";
 import { useEffect } from "react";
 
 export default function Laporan({ auth, laporan }) {
-    const { parseStyledHTML  } = useStyledHTML(laporan.content)
+    const { parseStyledHTML  } = useStyledHTMLHook(laporan.content)
     
     const pemisahKoma = (obj) => {
-        return obj.split(", ");
+        return obj.split(",");
     };
-
-    const setContentStyle = () => {};
 
     return (
         <AmLayout
@@ -146,78 +144,8 @@ export default function Laporan({ auth, laporan }) {
             {/* Content */}
             <div class="grid grid-cols-1 md:grid-cols-6 gap-8 w-full my-10">
                 <div class="col-span-4">
-                    {/* <div dangerouslySetInnerHTML={{ __html: laporan.content }} /> */}
                     <div>
-                        {parseStyledHTML()}  
-                        {/* <h1>Dalam rencana</h1><p>Ini adalah <a href="asdas" rel="noopener noreferrer" target="_blank">link</a></p><p>ini <strong>Bold</strong></p><p>ini <em>Italic</em></p><ol><li data-list="ordered"><span class="ql-ui" contenteditable="false"></span>List</li><li data-list="ordered"><span class="ql-ui" contenteditable="false"></span>list</li><li data-list="ordered"><span class="ql-ui" contenteditable="false"></span>list</li></ol><p>hua uhua</p><ol><li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>List</li><li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>sda</li><li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>sad</li></ol><p><img src="http://localhost:8000/storage/img/1709167184_Screenshot 2024-02-28 224259.png" /></p> */}
-                        {/* <h1 className="text-h1">Dalam rencana</h1>
-                        <p className="text-body">
-                            Ini adalah{" "}
-                            <a
-                                className="text-link"
-                                href="asdas"
-                                rel="noopener noreferrer"
-                                target="_blank"
-                            >
-                                link
-                            </a>
-                        </p>
-                        <p>
-                            ini <strong>Bold</strong>
-                        </p>
-                        <p>
-                            ini <em>Italic</em>
-                        </p>
-                        <ol className="list-disc pl-6">
-                            <li data-list="ordered">
-                                <span
-                                    className="ql-ui"
-                                    contenteditable="false"
-                                ></span>
-                                List
-                            </li>
-                            <li data-list="ordered">
-                                <span
-                                    className="ql-ui"
-                                    contenteditable="false"
-                                ></span>
-                                list
-                            </li>
-                            <li data-list="ordered">
-                                <span
-                                    className="ql-ui"
-                                    contenteditable="false"
-                                ></span>
-                                list
-                            </li>
-                        </ol>
-                        <p>hua uhua</p>
-                        <ol>
-                            <li data-list="bullet">
-                                <span
-                                    className="ql-ui"
-                                    contenteditable="false"
-                                ></span>
-                                List
-                            </li>
-                            <li data-list="bullet">
-                                <span
-                                    className="ql-ui"
-                                    contenteditable="false"
-                                ></span>
-                                sda
-                            </li>
-                            <li data-list="bullet">
-                                <span
-                                    className="ql-ui"
-                                    contenteditable="false"
-                                ></span>
-                                sad
-                            </li>
-                        </ol>
-                        <p>
-                            <img src="http://localhost:8000/storage/img/1709167184_Screenshot 2024-02-28 224259.png" />
-                        </p> */}
+                        {parseStyledHTML()}
                     </div>
                 </div>
                 <div class="col-span-2">
@@ -225,7 +153,7 @@ export default function Laporan({ auth, laporan }) {
                     <div className="flex flex-wrap mb-10">
                         {pemisahKoma(laporan.potential_product).map(
                             (service, index) => (
-                                <div className="border w-fit border-tertiary flex-center px-4 py-1 mr-2 rounded-full">
+                                <div className="border w-fit border-tertiary flex-center px-4 py-1 mr-2 mb-1 rounded-full">
                                     <p key={index} className="text-body">
                                         {service}
                                     </p>
@@ -237,7 +165,7 @@ export default function Laporan({ auth, laporan }) {
                     <div className="flex flex-wrap mb-10">
                         {pemisahKoma(laporan.info_competitor).map(
                             (service, index) => (
-                                <div className="border w-fit border-tertiary flex-center px-4 py-1 mr-2 rounded-full">
+                                <div className="border w-fit border-tertiary flex-center px-4 py-1 mr-2 mb-1 rounded-full">
                                     <p key={index} className="text-body">
                                         {service}
                                     </p>

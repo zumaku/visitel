@@ -1,7 +1,7 @@
 import React from 'react';
 import HTMLReactParser from 'html-react-parser';
 
-const useStyledHTML = (htmlContent) => {
+const useStyledHTMLHook = (htmlContent) => {
   const addClasses = (node) => {
     if (node.type === 'tag') {
       switch (node.name) {
@@ -61,4 +61,4 @@ const useStyledHTML = (htmlContent) => {
   return { parseStyledHTML };
 };
 
-export default useStyledHTML;
+export default useStyledHTMLHook;
