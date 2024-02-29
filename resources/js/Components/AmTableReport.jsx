@@ -16,7 +16,7 @@ import {
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function AmTableClient({ data, keySearch }) {
+export default function AmTableReport({ data, keySearch }) {
 
     const filteredData = data.filter((item) =>
         item.name.toLowerCase().includes(keySearch.toLowerCase())

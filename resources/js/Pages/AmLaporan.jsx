@@ -1,4 +1,4 @@
-import { AmTableClient } from "@/Components";
+import { AmTableReport } from "@/Components";
 import { MyButton, MyButtonLink, OptionButton } from "@/Components/buttons";
 import { SearchForm } from "@/Components/forms";
 import { AmLayout } from "@/Layouts";
@@ -42,7 +42,7 @@ export default function AmLaporan({ auth, semua_laporan }) {
 
             {/* Tables */}
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-12">
-                <AmTableClient data={semua_laporan} keySearch={keySearch} />
+                <AmTableReport data={semua_laporan} keySearch={keySearch} />
             </div>
         </AmLayout>
     );
