@@ -25,12 +25,12 @@ class VisitelReport extends Model
         'content',
     ];
 
-    public function client()
+    public function visitel_client()
     {
         return $this->belongsTo(VisitelClient::class, 'visitel_clients_id');
     }
 
-    public function user()
+    public function visitel_user()
     {
         return $this->belongsTo(VisitelUser::class, 'visitel_users_id');
     }
