@@ -19,7 +19,7 @@ import { useState } from "react";
 export default function AmTable({ data, keySearch }) {
 
     const filteredData = data.filter((item) =>
-        item.visitel_client.name.toLowerCase().includes(keySearch.toLowerCase())
+        item.name.toLowerCase().includes(keySearch.toLowerCase())
     );
 
     return (
@@ -89,7 +89,7 @@ export default function AmTable({ data, keySearch }) {
                     <td class="px-6 py-4">
                         <Link href={`/client/${laporan.visitel_client.slug}`} className="hover:text-primary">{laporan.visitel_client.name}</Link>
                     </td>
-                    <td class="px-6 py-4">15 January 2023</td>
+                    <td class="px-6 py-4">{laporan.date}</td>
                     <td class="px-6 py-4">
                         <div className="border w-fit border-tertiary flex-center px-2 py-1 rounded-full">{laporan.activity}</div>
                     </td>

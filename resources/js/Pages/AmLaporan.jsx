@@ -37,7 +37,7 @@ export default function AmLaporan({ auth, semua_laporan }) {
                         <FunnelIcon className="w-5 h-5" />
                     </MyButton>
                 </div>
-                <SearchForm keySearch={keySearch} handleChange={handleChange} placeholder={"Cari Klien"} />
+                <SearchForm keySearch={keySearch} handleChange={handleChange} placeholder={"Cari Laporan"} />
             </div>
 
             {/* Tables */}
