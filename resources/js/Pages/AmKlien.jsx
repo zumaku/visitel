@@ -18,7 +18,7 @@ export default function AmKlien({ auth, semua_client }) {
     return (
         <AmLayout
             user={auth.user}
-            active={"klient"}
+            active={"klien"}
             breadcrumbItem={[
                 { link: "/klien", text: "Klien", icon: "building" },
             ]}

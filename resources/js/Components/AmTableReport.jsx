@@ -90,7 +90,7 @@ export default function AmTableReport({ data, keySearch, defaultSlug = '', defau
                             <Link href={`/laporan/${laporan.slug}`} className="hover:text-primary">{laporan.name}</Link>
                         </th>
                         <td class="px-6 py-4">
-                            <Link href={`/client/${ clientSlug }`} className="hover:text-primary">{ clientName }</Link>
+                            <Link href={`/klien/${ clientSlug }`} className="hover:text-primary">{ clientName }</Link>
                         </td>
                         <td class="px-6 py-4">{laporan.date}</td>
                         <td class="px-6 py-4">

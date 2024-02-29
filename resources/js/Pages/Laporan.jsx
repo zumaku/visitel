@@ -62,7 +62,7 @@ export default function Laporan({ auth, laporan }) {
                     </td>
                     <td>
                         <Link
-                            href={`/klien/ ${laporan.visitel_client.slug}`}
+                            href={`/klien/${laporan.visitel_client.slug}`}
                             className="text-body"
                         >
                             {laporan.visitel_client.name}
