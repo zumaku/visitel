@@ -9,6 +9,8 @@ class VisitelReport extends Model
 {
     use HasFactory;
 
+    protected $table = 'visitel_reports';
+
     protected $fillable = [
         'name',
         'slug',
@@ -23,14 +25,14 @@ class VisitelReport extends Model
         'content',
     ];
 
-    public function visitel_user()
+    public function client()
     {
-        return $this->belongsTo(VisitelUser::class, 'id');
+        return $this->belongsTo(VisitelClient::class, 'visitel_clients_id');
     }
 
-    public function visitel_client()
+    public function user()
     {
-        return $this->belongsTo(VisitelClient::class, 'visitel_clients_id'); // Nama kolom fk di tabel report
+        return $this->belongsTo(VisitelUser::class, 'visitel_users_id');
     }
 }
 

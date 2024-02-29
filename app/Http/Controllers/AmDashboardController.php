@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\VisitelClient;
 use Inertia\Inertia;
 use App\Models\VisitelReport;
+use App\Models\VisitelUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -40,9 +41,9 @@ class AmDashboardController extends Controller
                             ->first();
     }
 
-    private function getClientData(){
+    private function getAllClientData(){
         $user = Auth::user();
-        return VisitelClient::where('visitel_witel_id', $user->visitel_witels_id)->get();
+        return VisitelClient::where('visitel_witels_id', $user->visitel_witels_id)->get();
     }
 
 
@@ -194,7 +195,7 @@ class AmDashboardController extends Controller
 
     public function addLaporan() {
         return Inertia::render('LaporanBaru', [
-            'clients' => $this->getClientData(),
+            'clients' => $this->getAllClientData(),
         ]);
     }
 
@@ -202,7 +203,81 @@ class AmDashboardController extends Controller
         $user = Auth::user();
         return Inertia::render('LaporanEdit', [
             'laporan' => $this->getReportData($slug),
-            'clients' => $this->getClientData(),
+            'clients' => $this->getAllClientData(),
         ]);
     }
+
+    public function klien() {
+        // Mendapatkan ID Witel dari user yang sedang login
+        $witel_id = Auth::user()->visitel_witels_id;
+
+        // Mengambil data report, user, dan client berdasarkan kondisi
+        $data = VisitelReport::select('visitel_reports.visitel_clients_id AS ID_CLIENT',
+                                    'visitel_reports.visitel_users_id AS ID_USER',
+                                    'visitel_clients.name AS CLIENT_NAME',
+                                    'visitel_clients.slug AS CLIENT_SLUG',
+                                    'visitel_clients.location AS CLIENT_LOCATION',
+                                    'visitel_clients.status AS CLIENT_STATUS',
+                                    'visitel_users.name AS USER_NAME',
+                                    'visitel_users.visitel_witels_id AS ID_Witel')
+        ->join('visitel_clients', 'visitel_reports.visitel_clients_id', '=', 'visitel_clients.id')
+        ->join('visitel_users', 'visitel_reports.visitel_users_id', '=', 'visitel_users.id')
+        ->where('visitel_users.visitel_witels_id', $witel_id)
+        // ->groupBy('visitel_reports.visitel_clients_id')
+        ->get();
+
+        // dd($data[0]);
+
+
+
+        $clientUserMap = [];
+
+        foreach ($data as $report) {
+            $clientId = $report->ID_CLIENT;
+            $clientName = $report->CLIENT_NAME;
+            $clientSlug = $report->CLIENT_SLUG;
+            $clientLocation = $report->CLIENT_LOCATION;
+            $clientStatus = $report->CLIENT_STATUS;
+            $userName = $report->USER_NAME;
+
+            if (!isset($clientUserMap[$clientId])) {
+                $clientUserMap[$clientId] = [
+                    'client_name' => $clientName,
+                    'client_slug' => $clientSlug,
+                    'client_location' => $clientLocation,
+                    'client_status' => $clientStatus,
+                    'users' => []
+                ];
+            }
+
+            // Menambahkan nama user ke dalam kumpulan data untuk client tertentu
+            $clientUserMap[$clientId]['users'][] = $userName;
+        }
+
+        // Mengembalikan data dalam bentuk array atau melakukan apa pun yang diperlukan dengan data tersebut
+        // return $clientUserMap;
+
+        // Mengembalikan kumpulan data client dan user
+        dd($clientUserMap);
+
+
+
+        // return $data;
+
+        // $clients = $this->getAllClientData();
+        // foreach ($clients as $client) {
+        //     $visiting_user = VisitelReport::with('visitel_user')
+        //                                     // ->where('visitel_witel')
+        //                                     ->where('visitel_clients_id', $client->id)
+        //                                     ->first();
+        //     dd($visiting_user);
+        //     $visiting_user->visitel_user != null ? $client->visited_user = $visiting_user->visitel_user->name : $client->visited_user = "";
+        // }
+        // dd($client);
+
+        // return Inertia::render('AmKlien', [
+        //     'semua_client' => $this->getAllClientData(),
+        // ]);
+    }
+
 }

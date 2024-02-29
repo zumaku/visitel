@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('location');
             $table->string('status', 255);
-            $table->foreignId('visitel_witel_id')->constrained();
+            $table->foreignId('visitel_witels_id')->constrained();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->timestamps();
         });

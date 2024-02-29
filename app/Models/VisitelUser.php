@@ -12,6 +12,8 @@ class VisitelUser extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'visitel_users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -74,6 +76,6 @@ class VisitelUser extends Authenticatable
 
     public function visitel_reports()
     {
-        return $this->hasMany(VisitelReport::class, 'visitel_user_id');
+        return $this->hasMany(VisitelReport::class, 'visitel_users_id');
     }
 }

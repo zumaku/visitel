@@ -9,6 +9,8 @@ class VisitelClient extends Model
 {
     use HasFactory;
 
+    protected $table = 'visitel_clients';
+
     public function witel()
     {
         return $this->belongsTo(VisitelWitel::class);

@@ -39,9 +39,8 @@ class VisitelClientFactory extends Factory
             'slug'=>fake()->slug(),
             'description'=>fake()->paragraph(),
             'location'=>fake()->address(),
-            'location'=>$random_status,
             'status'=>$status,
-            'visitel_witel_id'=>$random_witel,
+            'visitel_witels_id'=>$random_witel,
         ];
     }
 }
