@@ -82,45 +82,16 @@ export default function AmTableClient({ data, keySearch }) {
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <div className="border border-tertiary flex-center w-fit px-2 rounded-full">
-                            <Attribute name={'hua'} >
-                                <UserIcon className="text-primary w-4" />
-                            </Attribute>
-                        </div>
+                        {klien.usersName.map((userName, index) => (
+                            <div key={index} className="border border-tertiary flex-center w-fit px-2 mb-2 rounded-full">
+                                <Attribute name={userName} >
+                                    <UserIcon className="text-primary w-4" />
+                                </Attribute>
+                            </div>
+                        ))}
                     </td>
                 </tr>
             ))}
-            {/* {filteredData.map((laporan, index) => (
-                <tr key={index} class="bg-white hover:bg-secondary-100 border-b">
-                    <th
-                        scope="row"
-                        class="px-6 py-4 font-body-sm text-tertiary whitespace-nowrap"
-                    >
-                        <Link href={`/laporan/${laporan.slug}`} className="hover:text-primary">{laporan.name}</Link>
-                    </th>
-                    <td class="px-6 py-4">
-                        <Link href={`/client/${laporan.visitel_client.slug}`} className="hover:text-primary">{laporan.visitel_client.name}</Link>
-                    </td>
-                    <td class="px-6 py-4">{laporan.date}</td>
-                    <td class="px-6 py-4">
-                        <div className="border w-fit border-tertiary flex-center px-2 py-1 rounded-full">{laporan.activity}</div>
-                    </td>
-                    <td class="px-6 py-4 flex items-center">
-                        {laporan.ups_or_sus === "Upscale" && <ArrowTrendingUpIcon className="w-5 mr-2 text-primary" />}
-                        {laporan.ups_or_sus === "Sustain" && <ArrowTrendingDownIcon className="w-5 mr-2 text-primary" />}
-                        <p>{laporan.amount}</p>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div className="border border-tertiary flex-center w-fit px-2 rounded-full">
-                            <Attribute name={laporan.status} >
-                                {laporan.status === "Terencana" && <PauseCircleIcon className="w-4 mr-2 text-primary" />}
-                                {laporan.status === "Proses" && <PlayCircleIcon className="w-4 mr-2 text-primary" />}
-                                {laporan.status === "Selesai" && <CheckCircleIcon className="w-4 mr-2 text-primary" />}
-                            </Attribute>
-                        </div>
-                    </td>
-                </tr>
-            ))} */}
         </tbody>
     </table>
     )

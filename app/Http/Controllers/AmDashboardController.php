@@ -222,7 +222,10 @@ class AmDashboardController extends Controller
         
             $client->usersName = $userNames;
         }
-        dd($clients);
+
+        return Inertia::render('AmKlien', [
+            'semua_client' => $clients,
+        ]);
     }
 
 }
