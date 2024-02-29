@@ -14,7 +14,7 @@ Quill.register({
     "formats/image": Image,
 });
 
-const EditorText = ({ setEditorHtml, tempImg, setTempImg }) => {
+const EditorText = ({ htmlContent, setHtmlContent, tempImg, setTempImg }) => {
     const quillRef = useRef(null);
 
     useEffect(() => {
@@ -31,6 +31,8 @@ const EditorText = ({ setEditorHtml, tempImg, setTempImg }) => {
                     ],
                 },
             });
+
+            if(htmlContent) quill.root.innerHTML = htmlContent
 
             // Menangani saat gambar dimasukkan ke editor
             quill.getModule("toolbar").addHandler("image", () => {
@@ -80,7 +82,7 @@ const EditorText = ({ setEditorHtml, tempImg, setTempImg }) => {
             // Menangkap perubahan konten dalam editor
             quill.on("text-change", () => {
                 const html = quill.root.innerHTML;
-                setEditorHtml(html);
+                setHtmlContent(html);
             });
         }
     }, []);

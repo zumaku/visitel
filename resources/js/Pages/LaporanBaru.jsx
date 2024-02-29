@@ -45,14 +45,14 @@ export default function LaporanBaru({ auth, clients }) {
     const [upsOrSus, setUpsOrSus] = useState("Upscale");
     const [amount, setAmount] = useState();
     const [progres, setProgres] = useState('Terencana');
-    const [editorHtml, setEditorHtml] = useState("");
+    const [htmlContent, setHtmlContent] = useState("");
     const [tempImg, setTempImg] = useState([]);
     const [tagsLayanan, setTagsLayanan] = useState("");
     const [tagsKompetitor, setTagsKompetitor] = useState("");
 
     useEffect(() => {
         const deleteImageFromServer = async (imageName) => {
-            if (!editorHtml.includes(imageName)) {
+            if (!htmlContent.includes(imageName)) {
                 try {
                     const response = await axios.post("/delete-image", {
                         imageName: imageName,
@@ -73,7 +73,7 @@ export default function LaporanBaru({ auth, clients }) {
                 deleteImageFromServer(imageName);
             });
         }
-    }, [editorHtml]);
+    }, [htmlContent]);
 
     const slugify = (text) => {
         return text
@@ -128,7 +128,7 @@ export default function LaporanBaru({ auth, clients }) {
             activity: activity,
             potential_product: tagsLayanan,
             info_competitor: tagsKompetitor,
-            content: editorHtml,
+            content: htmlContent,
         });
     };
 
@@ -297,7 +297,8 @@ export default function LaporanBaru({ auth, clients }) {
                 <div class="col-span-4 min-h-12">
                     <h2 className="text-h2">Laporan</h2>
                     <EditorText
-                        setEditorHtml={setEditorHtml}
+                        htmlContent={htmlContent}
+                        setHtmlContent={setHtmlContent}
                         tempImg={tempImg}
                         setTempImg={setTempImg}
                     />
