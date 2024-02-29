@@ -22,6 +22,7 @@
     "dependencies": {
         "@heroicons/react": "^2.1.1",
         "@tanstack/react-table": "^8.12.0",
+        "html-react-parser": "^5.1.8",
         "jodit-react": "^4.0.9",
         "quill": "^2.0.0-rc.2",
         "quill-image-resize-module": "^3.0.0",
