@@ -41,10 +41,10 @@ export default function LaporanBaru({ auth, clients }) {
     const [clientId, setClientId] = useState(null);
     const [selectedClient, setSelectedClient] = useState(null);
     const [date, setDate] = useState(getTodayDate());
-    const [activity, setActivity] = useState();
+    const [activity, setActivity] = useState('Opportunity');
     const [upsOrSus, setUpsOrSus] = useState("Upscale");
     const [amount, setAmount] = useState();
-    const [progres, setProgres] = useState();
+    const [progres, setProgres] = useState('Terencana');
     const [editorHtml, setEditorHtml] = useState("");
     const [tempImg, setTempImg] = useState([]);
     const [tagsLayanan, setTagsLayanan] = useState("");
@@ -86,6 +86,9 @@ export default function LaporanBaru({ auth, clients }) {
             .replace(/-+$/, "");
     };
 
+    // useEffect(() => console.log(clientId), [clientId])
+    // useEffect(() => console.log(selectedClient), [selectedClient])
+
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
         setSlug(slugify(e.target.value));
@@ -97,6 +100,7 @@ export default function LaporanBaru({ auth, clients }) {
 
     const sendNewReport = async (postData) => {
         try {
+            console.log(postData);
             const response = await axios.post("/upload-laporan-baru", postData);
             console.log("Response from server:", response.data);
             setIsSuccess(true);
@@ -107,7 +111,7 @@ export default function LaporanBaru({ auth, clients }) {
         } catch (error) {
             console.error("Failed to create post:", error);
             setIsError(true);
-            throw error;
+            // throw error;
         }
         setIsLoading(false);
     };
@@ -117,9 +121,8 @@ export default function LaporanBaru({ auth, clients }) {
             name: title,
             slug: slug,
             date: date,
-            visitel_users_id: auth.user.id,
             visitel_clients_id: clientId,
-            statue: progres,
+            status: progres,
             ups_or_sus: upsOrSus,
             amount: amount,
             activity: activity,
@@ -225,7 +228,7 @@ export default function LaporanBaru({ auth, clients }) {
                             onChange={(e) => setActivity(e.target.value)}
                             className="py-1 px-2 rounded-md border-2 border-disable hover:border-tertiary-100 w-full"
                         >
-                            <option value="Opertunity">Opertunity</option>
+                            <option value="Opportunity" selected="selected">Opertunity</option>
                             <option value="Dealing">Dealing</option>
                             <option value="Visid CC">Visid CC</option>
                         </select>

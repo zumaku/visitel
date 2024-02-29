@@ -9,6 +9,20 @@ class VisitelReport extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'date',
+        'visitel_users_id',
+        'visitel_clients_id',
+        'status',
+        'ups_or_sus',
+        'amount',
+        'potential_product',
+        'info_competitor',
+        'content',
+    ];
+
     public function visitel_user()
     {
         return $this->belongsTo(VisitelUser::class, 'id');

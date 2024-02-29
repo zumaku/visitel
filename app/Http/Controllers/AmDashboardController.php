@@ -82,8 +82,42 @@ class AmDashboardController extends Controller
     }
 
     public function createLaporanBaru(Request $request){
-        // Isikan nanti
-        return response()->json(['message' => "Success"]);
+        $user = Auth::user();
+
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'slug' => 'required|string',
+            'date' => 'required|date',
+            'visitel_clients_id' => 'required|numeric',
+            'status' => 'in:Terencana,Proses,Selesai',
+            'ups_or_sus' => 'required|in:Upscale,Sustain',
+            'amount' => 'required|numeric',
+            'activity' => 'in:Opportunity,Dealing,Visid CC',
+            'potential_product' => 'string',
+            'info_competitor' => 'string',
+            'content' => 'string'
+        ]);
+
+        try {
+            $report = new VisitelReport();
+            $report->name = $validatedData['name'];
+            $report->slug = $validatedData['slug'];
+            $report->date = $validatedData['date'];
+            $report->visitel_users_id = $user->id;
+            $report->visitel_clients_id = $validatedData['visitel_clients_id'];
+            $report->status = $validatedData['status'];
+            $report->ups_or_sus = $validatedData['ups_or_sus'];
+            $report->amount = $validatedData['amount'];
+            $report->activity = $validatedData['activity'];
+            $report->potential_product = $validatedData['potential_product'];
+            $report->info_competitor = $validatedData['info_competitor'];
+            $report->content = $validatedData['content'];
+            $report->save();
+
+            return response()->json(['message' => 'Laporan berhasil dibuat'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal membuat laporan', 'error' => $e->getMessage()], 500);
+        }
     }
 
 

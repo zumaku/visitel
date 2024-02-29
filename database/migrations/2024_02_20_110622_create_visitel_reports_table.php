@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('ups_or_sus', 255);
             $table->string('amount', 255);
             $table->string('activity', 255);
-            $table->string('potential_product', 255);
-            $table->string('info_competitor', 255);
-            $table->text('content');
+            $table->string('potential_product', 255)->nullable();
+            $table->string('info_competitor', 255)->nullable();
+            $table->text('content')->nullable();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->timestamps();
         });
