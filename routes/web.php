@@ -48,10 +48,12 @@ Route::get('/dashboard', [AmDashboardController::class, 'index'])->middleware(['
 Route::get('/laporan', [AmDashboardController::class, 'laporan'])->middleware(['auth', 'verified'])->name('laporan');
 Route::get('/laporan/{slug}', [AmDashboardController::class, 'readLaporan'])->middleware(['auth', 'verified'])->name('read_laporan');
 Route::get('/laporan-baru', [AmDashboardController::class, 'addLaporan'])->middleware(['auth', 'verified'])->name('add_laporan');
+Route::get('/laporan-edit/{slug}', [AmDashboardController::class, 'editLaporan'])->middleware(['auth', 'verified'])->name('edit_laporan');
 
 Route::post('/upload-image', [AmDashboardController::class, 'storeImage'])->middleware(['auth', 'verified'])->name('upload_image');
 Route::post('/delete-image', [AmDashboardController::class, 'destroyImage'])->middleware(['auth', 'verified'])->name('delete_image');
 Route::post('/upload-laporan-baru', [AmDashboardController::class, 'createLaporanBaru'])->middleware(['auth', 'verified'])->name('upload_laporan_baru');
+Route::post('/update-laporan/{id}', [AmDashboardController::class, 'updateLaporan'])->middleware(['auth', 'verified'])->name('update_laporan');
 
 
 Route::middleware('auth')->group(function () {

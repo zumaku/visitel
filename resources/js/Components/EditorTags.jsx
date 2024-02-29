@@ -1,9 +1,17 @@
 import { TagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 
-export default function EditorTags({ setTagsString, placeholder = "Add tags", }) {
+export default function EditorTags({ tagsString, setTagsString, placeholder = "Add tags", }) {
     const [tags, setTags] = useState([]);
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState('');
+
+    // Menyiapkan tags awal berdasarkan tagsString
+    useEffect(() => {
+        if (tagsString) {
+            const initialTags = tagsString.split(",");
+            setTags(initialTags);
+        }
+    }, [tagsString]);
 
     // Memperbarui input value ketika pengguna mengetik
     const handleInputChange = (e) => {

@@ -23,12 +23,12 @@ class AmDashboardController extends Controller
                 ->get(['id', 'visitel_clients_id', 'name', 'slug', 'status', 'date', 'ups_or_sus', 'amount', 'activity']);
     }
 
-    private function getLimitReportData($limit){
+    private function getLimitReportData($limit, $order = 'date'){
         $user = Auth::user();
         return VisitelReport::with('visitel_client')
                 ->where('visitel_users_id', $user->id)
                 ->limit($limit)
-                ->orderBy('date', 'desc')
+                ->orderBy($order, 'desc')
                 ->get(['id', 'visitel_clients_id', 'name', 'slug', 'status', 'date', 'ups_or_sus', 'amount', 'activity']);
     }
 
@@ -46,7 +46,7 @@ class AmDashboardController extends Controller
     }
 
 
-    // ================ Create Data Method ================
+    // ================ Change Data Method ================
 
     public function storeImage(Request $request) {
         $request->validate([
@@ -120,13 +120,50 @@ class AmDashboardController extends Controller
         }
     }
 
+    public function updateLaporan(Request $request, $id)
+    {
+        // Validasi data dari request
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'slug' => 'required|string',
+            'date' => 'required|date',
+            'visitel_clients_id' => 'required|numeric',
+            'status' => 'required|in:Terencana,Proses,Selesai',
+            'ups_or_sus' => 'required|in:Upscale,Sustain',
+            'amount' => 'required|numeric',
+            'activity' => 'required|string',
+            'potential_product' => 'nullable|string',
+            'info_competitor' => 'nullable|string',
+            'content' => 'required|string',
+        ]);
+
+        try {
+            $oldReport = VisitelReport::find($id);
+    
+            if (!$oldReport) {
+                return response()->json(['message' => 'Laporan tidak ditemukan'], 404);
+            }
+    
+            $oldReport->fill($validatedData);
+            $oldReport->visitel_users_id = Auth::user()->id;
+            $oldReport->save();
+
+            // Berhasil update, kirim respon
+            return response()->json(['message' => 'Laporan berhasil diupdate'], 200);
+        } catch (\Exception $e) {
+            // Jika terjadi error, kirim respon error
+            return response()->json(['message' => 'Gagal mengupdate laporan', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
+
 
     // ================ Pages Method ================
     
     public function index() {
         // dd($this->getAllReportData());
         return Inertia::render('AmDashboard', [
-            'laporan_terbaru' => $this->getLimitReportData(3),
+            'laporan_terbaru' => $this->getLimitReportData(3, 'created_at'),
             'semua_laporan' => $this->getAllReportData(),
         ]);
     }
@@ -145,6 +182,14 @@ class AmDashboardController extends Controller
 
     public function addLaporan() {
         return Inertia::render('LaporanBaru', [
+            'clients' => $this->getClientData(),
+        ]);
+    }
+
+    public function editLaporan($slug) {
+        $user = Auth::user();
+        return Inertia::render('LaporanEdit', [
+            'laporan' => $this->getReportData($slug),
             'clients' => $this->getClientData(),
         ]);
     }

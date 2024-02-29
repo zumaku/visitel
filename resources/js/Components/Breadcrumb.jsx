@@ -6,6 +6,7 @@ const returnIcon = (icon) => {
     else if (icon === "docs") return <DocumentDuplicateIcon className='text-primary w-5 h-5' />
     else if (icon === "doc") return <DocumentTextIcon className='text-primary w-5 h-5' />
     else if (icon === "add_doc") return <DocumentPlusIcon className='text-primary w-5 h-5' />
+    else if (icon === "edit_doc") return <DocumentTextIcon className='text-primary w-5 h-5' />
     else if (icon === "building") return <BuildingOfficeIcon className='text-primary w-5 h-5' />
     else if (icon === "users") return <UserGroupIcon className='text-primary w-5 h-5' />
     else if (icon === "user") return <UserIcon className='text-primary w-5 h-5' />

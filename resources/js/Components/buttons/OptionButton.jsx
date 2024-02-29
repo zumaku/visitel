@@ -1,7 +1,8 @@
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function OptionButton({ deleteLaporanOption, downloadTableOption, downloadDokumenOption, editLaporanOption }) {
+export default function OptionButton({ deleteLaporanOption = "", downloadTableOption = "", downloadDokumenOption = "", editLaporanOption = "" }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -30,45 +31,45 @@ export default function OptionButton({ deleteLaporanOption, downloadTableOption,
                     className="py-2 text-body-sm"
                     aria-labelledby="dropdownMenuIconButton"
                 >
-                    {downloadTableOption && (
+                    {downloadTableOption != "" && (
                         <li>
-                        <a
-                            href="#"
+                        <Link
+                            href={downloadTableOption}
                             className="block px-4 py-2 hover:bg-secondary-100"
                         >
                             Download Table
-                        </a>
+                        </Link>
                     </li>
                     )}
-                    {downloadDokumenOption && (
+                    {downloadDokumenOption != "" && (
                         <li>
-                        <a
-                            href="#"
+                        <Link
+                            href={downloadDokumenOption}
                             className="block px-4 py-2 hover:bg-secondary-100"
                         >
                             Download Dokumen
-                        </a>
+                        </Link>
                     </li>
                     )}
-                    {editLaporanOption && (
+                    {editLaporanOption != "" && (
                         <li>
-                        <a
-                            href="#"
+                        <Link
+                            href={editLaporanOption}
                             className="block px-4 py-2 hover:bg-secondary-100"
                         >
                             Edit Laporan
-                        </a>
+                        </Link>
                     </li>
                     )}
                 </ul>
-                {deleteLaporanOption && (
+                {deleteLaporanOption != "" && (
                     <div className="py-2 bg-primary hover:bg-primary-500 active:bg-primary-600 group">
-                    <a
-                        href="#"
+                    <Link
+                        href={deleteLaporanOption}
                         className="block px-4 py-2 text-body-sm text-tertiar text-white"
                     >
                         Hapus
-                    </a>
+                    </Link>
                 </div>
                 )}
             </div>

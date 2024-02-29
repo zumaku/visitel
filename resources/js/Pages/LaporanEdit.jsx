@@ -16,7 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
-export default function LaporanBaru({ auth, clients }) {
+export default function LaporanEdit({ auth, laporan, clients }) {
     const [isOpen, setIsOpen] = useState(false);
     const openOverlay = () => {
         setIsOpen(true);
@@ -36,19 +36,19 @@ export default function LaporanBaru({ auth, clients }) {
     }
 
     // Calon Data Baru
-    const [title, setTitle] = useState("");
-    const [slug, setSlug] = useState("");
-    const [clientId, setClientId] = useState(null);
-    const [selectedClient, setSelectedClient] = useState(null);
-    const [date, setDate] = useState(getTodayDate());
-    const [activity, setActivity] = useState('Opportunity');
-    const [upsOrSus, setUpsOrSus] = useState("Upscale");
-    const [amount, setAmount] = useState();
-    const [progres, setProgres] = useState('Terencana');
-    const [htmlContent, setHtmlContent] = useState("");
+    const [title, setTitle] = useState(laporan.name);
+    const [slug, setSlug] = useState(laporan.slug);
+    const [clientId, setClientId] = useState(laporan.visitel_clients_id);
+    const [selectedClient, setSelectedClient] = useState(clients.find(client => client.id === laporan.visitel_clients_id));
+    const [date, setDate] = useState(laporan.date);
+    const [activity, setActivity] = useState(laporan.activity);
+    const [upsOrSus, setUpsOrSus] = useState(laporan.ups_or_sus);
+    const [amount, setAmount] = useState(laporan.amount);
+    const [progres, setProgres] = useState(laporan.status);
+    const [htmlContent, setHtmlContent] = useState(laporan.content);
     const [tempImg, setTempImg] = useState([]);
-    const [tagsLayanan, setTagsLayanan] = useState("");
-    const [tagsKompetitor, setTagsKompetitor] = useState("");
+    const [tagsLayanan, setTagsLayanan] = useState(laporan.potential_product);
+    const [tagsKompetitor, setTagsKompetitor] = useState(laporan.info_competitor);
 
     useEffect(() => {
         const deleteImageFromServer = async (imageName) => {
@@ -86,9 +86,6 @@ export default function LaporanBaru({ auth, clients }) {
             .replace(/-+$/, "");
     };
 
-    // useEffect(() => console.log(clientId), [clientId])
-    // useEffect(() => console.log(selectedClient), [selectedClient])
-
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
         setSlug(slugify(e.target.value));
@@ -98,15 +95,14 @@ export default function LaporanBaru({ auth, clients }) {
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    const sendNewReport = async (postData) => {
+    const sendEditedData = async (postData) => {
         try {
-            // console.log(postData);
-            const response = await axios.post("/upload-laporan-baru", postData);
+            const response = await axios.post("/update-laporan/" + laporan.id, postData);
             // console.log("Response from server:", response.data);
             setIsSuccess(true);
             setTimeout(() => {
                 window.location.href = "/laporan/" + slug;
-            }, 3000)
+            }, 2000)
             // return response;
         } catch (error) {
             console.error("Failed to create post:", error);
@@ -117,7 +113,7 @@ export default function LaporanBaru({ auth, clients }) {
     };
 
     const handleSubmit = () => {
-        sendNewReport({
+        sendEditedData({
             name: title,
             slug: slug,
             date: date,
@@ -137,10 +133,11 @@ export default function LaporanBaru({ auth, clients }) {
             user={auth.user}
             active={"laporan"}
             breadcrumbItem={[
+                { link: "/laporan", text: "Laporan", icon: "docs" },
                 {
-                    link: "/laporan-baru",
-                    text: "Laporan Baru",
-                    icon: "add_doc",
+                    link: "/laporan-edit/" + laporan.slug,
+                    text: "Edit: " + laporan.name,
+                    icon: "edit_doc",
                 },
             ]}
         >
@@ -306,11 +303,13 @@ export default function LaporanBaru({ auth, clients }) {
                 <div class="col-span-2">
                     <h2 className="text-h2">Layanan Potensial</h2>
                     <EditorTags
+                        tagsString={tagsLayanan}
                         setTagsString={setTagsLayanan}
                         placeholder='Tag Layanan (Pisah dengan koma ",")'
                     />
                     <h2 className="text-h2 mt-5">Info Kompetitor</h2>
                     <EditorTags
+                        tagsString={tagsKompetitor}
                         setTagsString={setTagsKompetitor}
                         placeholder='Tag Kompetitor (Pisah dengan koma ",")'
                     />
@@ -360,12 +359,12 @@ export default function LaporanBaru({ auth, clients }) {
                     )}
                     {isError && (
                         <div className="flex">
-                            <p className="ml-2 text-h1 text-white">Gagal Upload</p>
+                            <p className="ml-2 text-h1 text-white">Gagal Update</p>
                         </div>
                     )}
                     {isSuccess && (
                         <div className="flex">
-                            <p className="ml-2 text-h1 text-white">Upload berhasil</p>
+                            <p className="ml-2 text-h1 text-white">Update Berhasil</p>
                         </div>
                     )}
                 </div>

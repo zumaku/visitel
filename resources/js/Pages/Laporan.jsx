@@ -37,9 +37,9 @@ export default function Laporan({ auth, laporan }) {
             <div className="w-full flex justify-between items-start">
                 <h1 className={`text-h1 mb-4`}>{laporan.name}</h1>
                 <OptionButton
-                    downloadDokumenOption={true}
-                    editLaporanOption={true}
-                    deleteLaporanOption={true}
+                    downloadDokumenOption={"#"}
+                    editLaporanOption={"/laporan-edit/" + laporan.slug}
+                    deleteLaporanOption={"#"}
                 />
             </div>
 
