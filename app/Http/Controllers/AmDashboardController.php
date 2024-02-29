@@ -120,8 +120,7 @@ class AmDashboardController extends Controller
         }
     }
 
-    public function updateLaporan(Request $request, $id)
-    {
+    public function updateLaporan(Request $request, $id) {
         // Validasi data dari request
         $validatedData = $request->validate([
             'name' => 'required|string',
@@ -153,6 +152,19 @@ class AmDashboardController extends Controller
         } catch (\Exception $e) {
             // Jika terjadi error, kirim respon error
             return response()->json(['message' => 'Gagal mengupdate laporan', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function deleteLaporan($id) {
+        try {
+            $report = VisitelReport::find($id);
+            if (!$report) {
+                return response()->json(['message' => 'Laporan tidak ditemukan'], 404);
+            }
+            $report->delete();
+            return response()->json(['message' => 'Laporan berhasil dihapus'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal menghapus laporan' . $id, 'error' => $e->getMessage()], 500);
         }
     }
     

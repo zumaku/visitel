@@ -2,11 +2,38 @@ import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function OptionButton({ deleteLaporanOption = "", downloadTableOption = "", downloadDokumenOption = "", editLaporanOption = "" }) {
+export default function OptionButton({
+    deleteLaporanOption = "",
+    downloadTableOption = "",
+    downloadDokumenOption = "",
+    editLaporanOption = "",
+    setIsLoading,
+    setIsError,
+    setIsSuccess
+}) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
+    };
+
+    const handleDelete = async () => {
+        if (confirm("Yakin akan menghapus laporan ini?")) {
+            setIsLoading(true);
+            try {
+                const response = await axios.post(
+                    "/delete-laporan/" + deleteLaporanOption
+                );
+                setIsSuccess(true);
+                setTimeout(() => {
+                    window.location.href = "/laporan";
+                }, 3000);
+            } catch (error) {
+                console.error("Failed to create post:", error);
+                setIsError(true);
+            }
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -33,44 +60,44 @@ export default function OptionButton({ deleteLaporanOption = "", downloadTableOp
                 >
                     {downloadTableOption != "" && (
                         <li>
-                        <Link
-                            href={downloadTableOption}
-                            className="block px-4 py-2 hover:bg-secondary-100"
-                        >
-                            Download Table
-                        </Link>
-                    </li>
+                            <Link
+                                href={downloadTableOption}
+                                className="block px-4 py-2 hover:bg-secondary-100"
+                            >
+                                Download Table
+                            </Link>
+                        </li>
                     )}
                     {downloadDokumenOption != "" && (
                         <li>
-                        <Link
-                            href={downloadDokumenOption}
-                            className="block px-4 py-2 hover:bg-secondary-100"
-                        >
-                            Download Dokumen
-                        </Link>
-                    </li>
+                            <Link
+                                href={downloadDokumenOption}
+                                className="block px-4 py-2 hover:bg-secondary-100"
+                            >
+                                Download Dokumen
+                            </Link>
+                        </li>
                     )}
                     {editLaporanOption != "" && (
                         <li>
-                        <Link
-                            href={editLaporanOption}
-                            className="block px-4 py-2 hover:bg-secondary-100"
-                        >
-                            Edit Laporan
-                        </Link>
-                    </li>
+                            <Link
+                                href={editLaporanOption}
+                                className="block px-4 py-2 hover:bg-secondary-100"
+                            >
+                                Edit Laporan
+                            </Link>
+                        </li>
                     )}
                 </ul>
                 {deleteLaporanOption != "" && (
-                    <div className="py-2 bg-primary hover:bg-primary-500 active:bg-primary-600 group">
-                    <Link
-                        href={deleteLaporanOption}
-                        className="block px-4 py-2 text-body-sm text-tertiar text-white"
+                    <div
+                        onClick={handleDelete}
+                        className="py-2 bg-primary cursor-pointer hover:bg-primary-500 active:bg-primary-600 group"
                     >
-                        Hapus
-                    </Link>
-                </div>
+                        <p className="block px-4 py-2 text-body-sm text-tertiar text-white">
+                            Hapus
+                        </p>
+                    </div>
                 )}
             </div>
         </div>
