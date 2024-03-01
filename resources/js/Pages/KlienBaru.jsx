@@ -45,6 +45,7 @@ export default function KlienBaru({ auth, nama_klien }) {
     const [isSuccess, setIsSuccess] = useState(false);
 
     const sendNewClient = async (postData) => {
+        setIsLoading(true)
         try {
             const response = await axios.post("/upload-klien-baru", postData);
             setIsSuccess(true);
@@ -64,7 +65,8 @@ export default function KlienBaru({ auth, nama_klien }) {
             slug: slug,
             location: location,
             description: description,
-            status: status
+            status: status,
+            need_data: false
         })
     }
 

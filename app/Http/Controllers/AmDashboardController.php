@@ -184,17 +184,29 @@ class AmDashboardController extends Controller
             'location' => 'required|string',
             'description' => 'required|string',
             'status' => 'required|string',
+            'need_data' => 'boolean'
         ]);
 
         try {
-            $report = new VisitelClient();
-            $report->name = $validatedData['name'];
-            $report->slug = $validatedData['slug'];
-            $report->location = $validatedData['location'];
-            $report->description = $validatedData['description'];
-            $report->status = $validatedData['status'];
-            $report->visitel_witels_id = $user->visitel_witels_id;
-            $report->save();
+            $client = new VisitelClient();
+            $client->name = $validatedData['name'];
+            $client->slug = $validatedData['slug'];
+            $client->location = $validatedData['location'];
+            $client->description = $validatedData['description'];
+            $client->status = $validatedData['status'];
+            $client->visitel_witels_id = $user->visitel_witels_id;
+            $client->save();
+
+            if($validatedData['need_data']) {
+                $client_data = [];
+                $client_data['id'] = $client->id;
+                $client_data['name'] = $client->name;
+
+                return response()->json([
+                    'message' => 'Client berhasil ditambahkan',
+                    'client_data' => $client_data
+                ], 201);
+            }
 
             return response()->json(['message' => 'Client berhasil ditambahkan'], 201);
         } catch (\Exception $e) {
