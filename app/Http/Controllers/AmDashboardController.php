@@ -42,9 +42,9 @@ class AmDashboardController extends Controller
                             ->first();
     }
 
-    private function getAllClientData(){
+    private function getAllClientData($attribute = '*'){
         $user = Auth::user();
-        return VisitelClient::where('visitel_witels_id', $user->visitel_witels_id)->get();
+        return VisitelClient::where('visitel_witels_id', $user->visitel_witels_id)->get($attribute);
     }
 
     private function getClientData($slug){
@@ -174,13 +174,39 @@ class AmDashboardController extends Controller
             return response()->json(['message' => 'Gagal menghapus laporan' . $id, 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function createKlienBaru(Request $request) {
+        $user = Auth::user();
+
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'slug' => 'required|string',
+            'location' => 'required|string',
+            'description' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        try {
+            $report = new VisitelClient();
+            $report->name = $validatedData['name'];
+            $report->slug = $validatedData['slug'];
+            $report->location = $validatedData['location'];
+            $report->description = $validatedData['description'];
+            $report->status = $validatedData['status'];
+            $report->visitel_witels_id = $user->visitel_witels_id;
+            $report->save();
+
+            return response()->json(['message' => 'Client berhasil ditambahkan'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal menambahkan client', 'error' => $e->getMessage()], 500);
+        }
+    }
     
 
 
     // ================ Pages Method ================
     
     public function index() {
-        // dd($this->getAllReportData());
         return Inertia::render('AmDashboard', [
             'laporan_terbaru' => $this->getLimitReportData(3, 'created_at'),
             'semua_laporan' => $this->getAllReportData(),
@@ -254,6 +280,18 @@ class AmDashboardController extends Controller
 
         return Inertia::render('Klien', [
             'client' => $client,
+        ]);
+    }
+
+    public function addKlien() {
+        $client_name = [];
+        foreach($this->getAllClientData('name') as $client) {
+            $client_name[] = $client->name;
+        }
+        $client_name = array_map('strtolower', $client_name);
+
+        return Inertia::render('KlienBaru', [
+            'nama_klien' => $client_name
         ]);
     }
 }

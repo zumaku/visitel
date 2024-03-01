@@ -51,12 +51,14 @@ Route::get('/laporan-baru', [AmDashboardController::class, 'addLaporan'])->middl
 Route::get('/laporan-edit/{slug}', [AmDashboardController::class, 'editLaporan'])->middleware(['auth', 'verified'])->name('edit_laporan');
 Route::get('/klien', [AmDashboardController::class, 'klien'])->middleware(['auth', 'verified'])->name('klien');
 Route::get('/klien/{slug}', [AmDashboardController::class, 'readKlien'])->middleware(['auth', 'verified'])->name('read_klien');
+Route::get('/klien-baru', [AmDashboardController::class, 'addKlien'])->middleware(['auth', 'verified'])->name('add_klien');
 
 Route::post('/upload-image', [AmDashboardController::class, 'storeImage'])->middleware(['auth', 'verified'])->name('upload_image');
 Route::post('/delete-image', [AmDashboardController::class, 'destroyImage'])->middleware(['auth', 'verified'])->name('delete_image');
 Route::post('/upload-laporan-baru', [AmDashboardController::class, 'createLaporanBaru'])->middleware(['auth', 'verified'])->name('upload_laporan_baru');
 Route::post('/update-laporan/{id}', [AmDashboardController::class, 'updateLaporan'])->middleware(['auth', 'verified'])->name('update_laporan');
 Route::post('/delete-laporan/{id}', [AmDashboardController::class, 'deleteLaporan'])->middleware(['auth', 'verified'])->name('delete_laporan');
+Route::post('/upload-klien-baru', [AmDashboardController::class, 'createKlienBaru'])->middleware(['auth', 'verified'])->name('upload_klien_baru');
 
 
 Route::middleware('auth')->group(function () {
