@@ -101,7 +101,7 @@ export default function LaporanBaru({ auth, clients }) {
     const sendNewReport = async (postData) => {
         try {
             // console.log(postData);
-            const response = await axios.post("/upload-laporan-baru", postData);
+            const response = await axios.post("/upload-laporan-baru/", postData);
             // console.log("Response from server:", response.data);
             setIsSuccess(true);
             setTimeout(() => {
@@ -335,7 +335,7 @@ export default function LaporanBaru({ auth, clients }) {
             </div>
 
             {/* Alert */}
-            {isLoading || isError || isSuccess && (
+            {(isLoading || isError || isSuccess) && (
                 <div className="w-full h-screen absolute top-0 left-0 bg-black bg-opacity-60 z-50 flex-center">
                     {isLoading && (
                         <div role="status">

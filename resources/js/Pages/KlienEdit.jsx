@@ -9,14 +9,14 @@ import {
 } from "@heroicons/react/24/outline";
 import { MyButton } from "@/Components/buttons";
 
-export default function KlienBaru({ auth, nama_klien }) {
+export default function KlienEdit({ auth, client, nama_klien }) {
     const [nameExist, setNameExist] = useState(false)
 
-    const [name, setName] = useState('')
-    const [slug, setSlug] = useState('')
-    const [location, setLocation] = useState('')
-    const [description, setDescription] = useState('')
-    const [status, setStatus] = useState('Calon Client')
+    const [name, setName] = useState(client.name)
+    const [slug, setSlug] = useState(client.slug)
+    const [location, setLocation] = useState(client.location)
+    const [description, setDescription] = useState(client.description)
+    const [status, setStatus] = useState(client.status)
     
     const slugify = (text) => {
         return text
@@ -34,17 +34,18 @@ export default function KlienBaru({ auth, nama_klien }) {
         setSlug(slugify(e.target.value));
     };
 
-    useEffect(() => nama_klien.includes(name.toLowerCase()) ? setNameExist(true) : setNameExist(false), [name]);
+    useEffect(() => nama_klien.includes(name.toLowerCase()) && name !== client.name ? setNameExist(true) : setNameExist(false), [name]);
 
 
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    const sendNewClient = async (postData) => {
+    const sendEditedData = async (postData) => {
         setIsLoading(true)
+        console.log(postData);
         try {
-            const response = await axios.post("/upload-klien-baru", postData);
+            const response = await axios.post("/update-klien/" + client.id, postData);
             setIsSuccess(true);
             setTimeout(() => {
                 window.location.href = "/klien/" + slug;
@@ -57,24 +58,23 @@ export default function KlienBaru({ auth, nama_klien }) {
     };
 
     const handleSubmit = () => {
-        sendNewClient({
+        sendEditedData({
             name: name,
             slug: slug,
             location: location,
             description: description,
+            // visitel_witels_id: client.visitel_witels_id,
             status: status,
-            need_data: false
         })
     }
-
-    
 
     return (
         <AmLayout
             user={auth.user}
             active={"klien"}
             breadcrumbItem={[
-                { link: "/klien-baru", text: "Klien Baru", icon: "building" },
+                { link: "/klien", text: "Klien", icon: "building" },
+                { link: "/klien-edit", text: "Edit: " + client.name, icon: "building" },
             ]}
         >
             <div className="w-full flex flex-col justify-between items-start">
@@ -160,7 +160,7 @@ export default function KlienBaru({ auth, nama_klien }) {
                 </MyButton>
             </div>
 
-            {isLoading || isError || isSuccess && (
+            {(isLoading || isError || isSuccess) && (
                 <div className="w-full h-screen absolute top-0 left-0 bg-black bg-opacity-60 z-50 flex-center">
                     {isLoading && (
                         <div role="status">
@@ -185,16 +185,16 @@ export default function KlienBaru({ auth, nama_klien }) {
                     )}
                     {isError && (
                         <div className="flex">
-                            <p className="ml-2 text-h1 text-white">Gagal Upload</p>
+                            <p className="ml-2 text-h1 text-white">Gagal Update Klien</p>
                         </div>
                     )}
                     {isSuccess && (
                         <div className="flex">
-                            <p className="ml-2 text-h1 text-white">Upload berhasil</p>
+                            <p className="ml-2 text-h1 text-white">Update Klien Berhasil</p>
                         </div>
                     )}
                 </div>
             )}
         </AmLayout>
-    )
-};
+    );
+}

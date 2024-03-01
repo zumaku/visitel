@@ -214,6 +214,33 @@ class AmDashboardController extends Controller
         }
     }
 
+    public function updateKlien(Request $request, $id) {
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'slug' => 'required|string',
+            'location' => 'required|string',
+            'visitel_witels_id' => 'required|numeric',
+            'description' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        try {
+            $oldClient = VisitelClient::find($id);
+    
+            if (!$oldClient) {
+                return response()->json(['message' => 'Klien tidak ditemukan'], 404);
+            }
+    
+            $oldClient->fill($validatedData);
+            $oldClient->visitel_witels_id = Auth::user()->visitel_witels_id;
+            $oldClient->save();
+
+            return response()->json(['message' => 'Klien berhasil diupdate'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal mengupdate klien', 'error' => $e->getMessage()], 500);
+        }
+    }
+
     public function deleteKlien($id) {
         try {
             $report = VisitelClient::find($id);
@@ -317,6 +344,20 @@ class AmDashboardController extends Controller
 
         return Inertia::render('KlienBaru', [
             'nama_klien' => $client_name
+        ]);
+    }
+
+    public function editKlien($slug) {
+        $user = Auth::user();
+        $client_name = [];
+        foreach($this->getAllClientData('name') as $client) {
+            $client_name[] = $client->name;
+        }
+        $client_name = array_map('strtolower', $client_name);
+
+        return Inertia::render('KlienEdit', [
+            'nama_klien' => $client_name,
+            'client' => $this->getClientData($slug),
         ]);
     }
 }
