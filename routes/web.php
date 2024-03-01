@@ -59,6 +59,7 @@ Route::post('/upload-laporan-baru', [AmDashboardController::class, 'createLapora
 Route::post('/update-laporan/{id}', [AmDashboardController::class, 'updateLaporan'])->middleware(['auth', 'verified'])->name('update_laporan');
 Route::post('/delete-laporan/{id}', [AmDashboardController::class, 'deleteLaporan'])->middleware(['auth', 'verified'])->name('delete_laporan');
 Route::post('/upload-klien-baru', [AmDashboardController::class, 'createKlienBaru'])->middleware(['auth', 'verified'])->name('upload_klien_baru');
+Route::post('/delete-klien/{id}', [AmDashboardController::class, 'deleteKlien'])->middleware(['auth', 'verified'])->name('delete_klien');
 
 
 Route::middleware('auth')->group(function () {

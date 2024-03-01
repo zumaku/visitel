@@ -213,6 +213,19 @@ class AmDashboardController extends Controller
             return response()->json(['message' => 'Gagal menambahkan client', 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function deleteKlien($id) {
+        try {
+            $report = VisitelClient::find($id);
+            if (!$report) {
+                return response()->json(['message' => 'Klien tidak ditemukan'], 404);
+            }
+            $report->delete();
+            return response()->json(['message' => 'Klien berhasil dihapus'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal menghapus klien' . $id, 'error' => $e->getMessage()], 500);
+        }
+    }
     
 
 

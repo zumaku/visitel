@@ -42,7 +42,7 @@ export default function Laporan({ auth, laporan }) {
                 <OptionButton
                     downloadDokumenOption={"#"}
                     editOption={"/laporan-edit/" + laporan.slug}
-                    deleteOption={laporan.id}
+                    deleteOption={"/delete-laporan/" + laporan.id}
                     setIsLoading={setIsLoading}
                     setIsError={setIsError}
                     setIsSuccess={setIsSuccess}
