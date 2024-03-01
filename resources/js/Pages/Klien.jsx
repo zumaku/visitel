@@ -1,11 +1,10 @@
-import { OptionButton } from "@/Components/buttons";
+import { MyButton, MyButtonLink, OptionButton } from "@/Components/buttons";
 import { AmLayout } from "@/Layouts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-    BuildingOfficeIcon,
+    ArrowUturnLeftIcon,
     MapPinIcon,
     TagIcon,
-    UserIcon,
     UsersIcon,
 } from "@heroicons/react/24/outline";
 import { AmTableReport, Attribute } from "@/Components";
@@ -97,13 +96,13 @@ export default function Klien({ auth, client }) {
             </div>
 
             {/* Alert */}
-            {isLoading || isError || isSuccess && (
+            {(isLoading || isError || isSuccess) && (
                 <div className="w-full h-screen absolute top-0 left-0 bg-black bg-opacity-60 z-50 flex-center">
                     {isLoading && (
                         <div role="status">
                             <svg
                                 aria-hidden="true"
-                                class="w-8 h-8 text-gray-200 animate-spin  fill-primary"
+                                class="w-10 h-10 text-gray-200 animate-spin  fill-primary"
                                 viewBox="0 0 100 101"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -121,14 +120,23 @@ export default function Klien({ auth, client }) {
                         </div>
                     )}
                     {isError && (
-                        <div className="flex flex-col">
-                            <p className="text-h1 text-white">Gagal Menghapus Klien!</p>
-                            <p className="text-p text-white">Klient mungkin terkait dengan salah satu laporan.</p>
+                        <div className="flex-center flex-col">
+                            <div className="flex mb-2">
+                                <p className="ml-2 text-h1 text-white">Gagal Menghapus Laporan!</p>
+                            </div>
+                            <MyButton name="Tutup" onClick={() => setIsError(false)} >
+                                <ArrowUturnLeftIcon className="w-5 h-5 mr-1 text-white" stroke-width="2" />
+                            </MyButton>
                         </div>
                     )}
                     {isSuccess && (
-                        <div className="flex">
-                            <p className="ml-2 text-h1 text-white">Klien Berhasil Dihapus!</p>
+                        <div className="flex-center flex-col">
+                            <div className="flex mb-2">
+                                <p className="ml-2 text-h1 text-white">Laporan Berhasil Dihapus!</p>
+                            </div>
+                            <MyButtonLink name="Tutup" link ="/klien">
+                                <ArrowUturnLeftIcon className="w-5 h-5 mr-1 text-white" stroke-width="2" />
+                            </MyButtonLink>
                         </div>
                     )}
                 </div>

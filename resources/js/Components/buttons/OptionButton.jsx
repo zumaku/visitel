@@ -21,13 +21,8 @@ export default function OptionButton({
         if (confirm("Yakin akan menghapus laporan ini?")) {
             setIsLoading(true);
             try {
-                const response = await axios.post(deleteOption)
+                await axios.post(deleteOption)
                 setIsSuccess(true);
-                setTimeout(() => {
-                    if(deleteOption.includes("/delete-klien/")) window.location.href = "/klien";
-                    else if(deleteOption.includes("/delete-laporan/")) window.location.href = "/laporan";
-                    else window.location.href = "/";
-                }, 3000);
             } catch (error) {
                 console.error("Failed to create post:", error);
                 setIsError(true);
