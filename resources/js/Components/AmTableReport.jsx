@@ -14,9 +14,11 @@ import {
     PlayCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function AmTableReport({ data, keySearch, defaultSlug = '', defaultClientName = '' }) {
+export default function AmTableReport({ data, keySearch, defaultSlug = '', defaultClientName = '', fromKlient = '' }) {
+
+    // useEffect(() => console.log(data),[])
 
     const filteredData = data.filter((item) =>
         item.name.toLowerCase().includes(keySearch.toLowerCase())
@@ -79,8 +81,11 @@ export default function AmTableReport({ data, keySearch, defaultSlug = '', defau
         {/* Body */}
         <tbody>
             {filteredData.map((laporan, index) => {
-                const clientSlug = laporan.visitel_client !== undefined  && laporan.visitel_client.slug !== undefined && defaultSlug !== '' ? laporan.visitel_client.slug : defaultSlug
-                const clientName = laporan.visitel_client !== undefined  && laporan.visitel_client.name !== undefined && defaultClientName !== '' ? laporan.visitel_client.slug : defaultClientName
+                // const clientSlug = laporan.visitel_client !== undefined  && laporan.visitel_client.slug !== undefined && defaultSlug !== '' ? laporan.visitel_client.slug : defaultSlug
+                // const clientName = laporan.visitel_client !== undefined  && laporan.visitel_client.name !== undefined && defaultClientName !== '' ? laporan.visitel_client.name : defaultClientName
+                
+                // console.log(laporan.visitel_client.name);
+
                 return (
                     <tr key={index} class="bg-white hover:bg-secondary-100 border-b">
                         <th
@@ -90,7 +95,7 @@ export default function AmTableReport({ data, keySearch, defaultSlug = '', defau
                             <Link href={`/laporan/${laporan.slug}`} className="hover:text-primary">{laporan.name}</Link>
                         </th>
                         <td class="px-6 py-4">
-                            <Link href={`/klien/${ clientSlug }`} className="hover:text-primary">{ clientName }</Link>
+                            <Link href={`/klien/${laporan.visitel_client.slug !== '' ? laporan.visitel_client.slug : fromKlient['slug']}`} className="hover:text-primary">{laporan.visitel_client.name !== '' ? laporan.visitel_client.name : fromKlient['name']}</Link>
                         </td>
                         <td class="px-6 py-4">{laporan.date}</td>
                         <td class="px-6 py-4">

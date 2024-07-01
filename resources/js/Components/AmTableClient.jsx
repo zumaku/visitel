@@ -72,13 +72,18 @@ export default function AmTableClient({ data, keySearch }) {
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        {klien.usersName.map((userName, index) => (
-                            <div key={index} className="border border-tertiary flex-center w-fit px-2 mb-2 rounded-full">
-                                <Attribute name={userName.split(" ").slice(0, 2).join(" ")} >
-                                    <UserIcon className="text-primary w-4" />
-                                </Attribute>
-                            </div>
-                        ))}
+
+                        {klien.usersName && klien.usersName.length > 0 ? (
+                            klien.usersName.map((userName, index2) => (
+                                <div key={index2} className="border border-tertiary flex-center w-fit px-2 mb-2 rounded-full">
+                                    <Attribute name={userName.split(" ").slice(0, 2).join(" ")} >
+                                        <UserIcon className="text-primary w-4" />
+                                    </Attribute>
+                                </div>
+                            ))
+                        ) : (
+                            <p>Belum Ada Kunjungan</p>
+                        )}
                     </td>
                 </tr>
             ))}

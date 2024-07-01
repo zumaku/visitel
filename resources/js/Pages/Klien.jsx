@@ -7,7 +7,7 @@ import {
     TagIcon,
     UsersIcon,
 } from "@heroicons/react/24/outline";
-import { AmTableReport, Attribute } from "@/Components";
+import { AmTableClient, AmTableReport, Attribute } from "@/Components";
 
 export default function Klien({ auth, client }) {
 
@@ -91,7 +91,11 @@ export default function Klien({ auth, client }) {
                     <p>{client.description}</p>
 
                     <h3 className="text-h3 mt-10">Laporan Terkait</h3>
-                    <AmTableReport data={client.visitel_reports} keySearch={''} defaultSlug={client.slug} defaultClientName={client.name} />
+                    {console.log(client.visitel_reports)}
+                    <AmTableReport data={client.visitel_reports} keySearch={''} fromKlient={[
+                        'name' = client.name,
+                        'slug' = client.slug
+                    ]}/>
                 </div>
             </div>
 
